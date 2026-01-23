@@ -1,0 +1,1526 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto ADAM — Transformando Vidas pelo Esporte</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>
+  function togglePix() {
+    document.getElementById('pix-info').classList.toggle('hidden');
+  }
+
+  function copyPix() {
+    const pixKey = document.getElementById('pix-key').innerText;
+    navigator.clipboard.writeText(pixKey);
+    alert('Chave PIX copiada!');
+  }
+</script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --purple-primary: #6A0DAD;
+      --purple-hover: #9B59B6;
+      --text-dark: #333333;
+      --white: #FFFFFF;
+      --purple-light: #F5E6FF;
+    }
+    
+    .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .font-body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-primary {
+      background-color: var(--purple-primary);
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--purple-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(106, 13, 173, 0.3);
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid var(--purple-primary);
+      color: var(--purple-primary);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--purple-primary);
+      color: var(--white);
+    }
+    
+    .section-fade {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--purple-primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(106, 13, 173, 0.15);
+    }
+    
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .lightbox.active {
+      display: flex;
+    }
+    
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+    
+    .gallery-item {
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    
+    .gallery-item img {
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+    
+    .stat-number {
+      background: linear-gradient(135deg, var(--purple-primary), var(--purple-hover));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      z-index: 1001;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .toast.success {
+      background-color: #10B981;
+    }
+    
+    .toast.error {
+      background-color: #EF4444;
+    }
+    
+    .schedule-table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    
+    .schedule-table th {
+      background-color: var(--purple-primary);
+      color: white;
+    }
+    
+    .schedule-table tr:nth-child(even) {
+      background-color: var(--purple-light);
+    }
+    
+    .confirmation-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .confirmation-modal.active {
+      display: flex;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full font-body bg-white text-gray-800">
+ <div id="app-wrapper" class="w-full min-h-screen overflow-auto">
+   <nav id="main-nav" class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex justify-between items-center h-16"><!-- Logo -->
+<div class="flex items-center space-x-3">
+  <img 
+    src="logo.png" 
+    alt="Projeto ADAM" 
+    class="h-10 w-auto"
+  >
+  <span id="nav-logo-text" class="font-heading font-bold text-xl text-purple-700">
+    Projeto ADAM
+  </span>
+</div>
+
+      <div class="hidden md:flex items-center space-x-8"><a href="#home" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Início</a> <a href="#sobre" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Sobre</a> <a href="#programas" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Programas</a> <a href="#locais" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Locais</a> <a href="#galeria" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Galeria</a> <a href="#doacoes" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Doações</a> <a href="#contato" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Contato</a>
+      </div><!-- CTA Buttons -->
+      <div class="hidden md:flex items-center space-x-4"><a href="#doacoes" class="btn-primary px-6 py-2 rounded-full font-semibold text-sm">Doe Agora</a>
+      </div><!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden p-2">
+       <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-16 left-0 w-64 h-full bg-white shadow-lg md:hidden">
+     <div class="p-6 space-y-4"><a href="#home" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Início</a> <a href="#sobre" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Sobre</a> <a href="#programas" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Programas</a> <a href="#locais" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Locais</a> <a href="#galeria" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Galeria</a> <a href="#doacoes" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Doações</a> <a href="#contato" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Contato</a>
+      <div class="pt-4"><a href="#doacoes" class="btn-primary block text-center px-6 py-2 rounded-full font-semibold">Doe Agora</a>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="home" class="pt-16 min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-white"></div>
+    <div class="absolute top-20 right-0 w-96 h-96 bg-purple-200 rounded-full filter blur-3xl opacity-30"></div>
+    <div class="absolute bottom-0 left-0 w-72 h-72 bg-purple-300 rounded-full filter blur-3xl opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+     <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="section-fade">
+       <div class="inline-block px-4 py-2 bg-purple-100 rounded-full mb-6"><span class="text-purple-700 font-semibold text-sm"></span>
+       </div>
+       <h1 id="hero-title" class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">Projeto ADAM</h1>
+       <p id="hero-subtitle" class="text-xl sm:text-2xl text-gray-600 mb-8 leading-relaxed">Ensinar as crianças e adolecentes técnicas e fundamentos de futebol e princípios cristãos que contribuam para seu desenvolvimento pessoal e social.</p>
+       <div class="flex flex-wrap gap-4"><a href="#doacoes" id="hero-btn-donate" class="btn-primary px-8 py-4 rounded-full font-bold text-lg inline-flex items-center">
+         <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+         </svg> Doe Agora </a> <a href="#programas" id="hero-btn-participate" class="btn-secondary px-8 py-4 rounded-full font-bold text-lg inline-flex items-center">
+         <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+         </svg> Participe </a>
+       </div>
+      </div>
+    
+   </section><!-- Stats Section -->
+   <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center">
+       <div class="stat-number font-heading text-4xl sm:text-5xl font-extrabold">
+        100+
+       </div>
+       <p class="text-gray-600 mt-2 font-medium">Jovens Atendidos</p>
+      </div>
+      <div class="text-center">
+       <div class="stat-number font-heading text-4xl sm:text-5xl font-extrabold">
+        9
+       </div>
+       <p class="text-gray-600 mt-2 font-medium">Anos de Atuação</p>
+      </div>
+      <div class="text-center">
+       <div class="stat-number font-heading text-4xl sm:text-5xl font-extrabold">
+        2
+       </div>
+       <p class="text-gray-600 mt-2 font-medium">Cidades</p>
+      </div>
+      <div class="text-center">
+       <div class="stat-number font-heading text-4xl sm:text-5xl font-extrabold">
+        +Amor em Cristo
+       </div>
+       <p class="text-gray-600 mt-2 font-medium"></p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Mission Section -->
+   <section class="py-20 bg-purple-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Nossa Missão</h2>
+      <p id="mission-text" class="text-lg text-gray-600 leading-relaxed">Ensinar as crianças e adolecentes técnicas e fundamentos de futebol e princípios cristãos que contribuam para seu desenvolvimento pessoal e social.</p>
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section id="sobre" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+       <div class="relative">
+        <div class="bg-gradient-to-br from-purple-100 to-purple-200 rounded-3xl p-8"><!-- Founder Placeholder -->
+         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="bg-gradient-to-br from-purple-400 to-purple-600 h-64 flex items-center justify-center">
+           <div class="text-center text-white">
+            <div class="w-24 h-24 bg-white bg-opacity-20 rounded-full mx-auto mb-4 flex items-center justify-center">
+             <svg class="w-12 h-12" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+             </svg>
+            </div>
+            <p class="text-sm opacity-100">
+    <img src="AdamFundador.png" alt="Descrição da imagem" width="512" style="transform: translateY(-200)" class="relative z-30;">
+            </p>
+           </div>
+          </div>
+          <div class="p-6 text-center">
+           <h4 class="font-heading font-bold text-xl text-gray-900" class="relative z-20">Sr. Francisco</h4>
+           <p class="text-purple-600 font-medium" class="relative z-20">Fundador</p>
+          </div>
+         </div>
+        </div>
+        <div class="absolute -bottom-6 -right-6 bg-yellow-400 rounded-2xl p-4 shadow-lg"><span class="text-3xl">🏆</span>
+        </div>
+       </div>
+      </div>
+      <div><span class="text-purple-600 font-semibold text-sm uppercase tracking-wider">Nossa História</span>
+       <h2 class="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-6">Sobre o Projeto ADAM</h2>
+       <div class="space-y-4 text-gray-600 leading-relaxed">
+        <p>Em dezembro de 2017 um senho com uma bola, visando resgatar crianças de um ambiente nada saudavel, inicia em uma praça pública do Jardim Cerejeiras, em Atibaia-SP um projeto de resgate. Ali se juntaram algumas crianças que queriam jogar com aquela bola e, diante disso, o sr francisco(também conhecido com seu Chico) junto com sua esposa D.Maria tiveram a ideia de iniciar um projeto de futebol. O projeto logo ganhou mais voluntários e mais crianças e adolecentes, chegando hoje ao numero de aproximadamente 100 crianças participando dos treinos aos sábados.</p>
+        <p>A ADAM (Associação Desportiva de apoio ao Menor) hoje é reconhecida como uma ONG, tendo seu papel social de auxílio às crianças e adolecentes reconhecido perante aos órgãos.</p>
+        <p>A ADAM atende atualmente cerca de 100 crianças e adolecentes de 6 à 18 anos todo os sábados entre 8h e 11h30 em São Paulo. Durante a semana alguns atendimentos à essas crianças e adolecentes são realizados pontualmente junto às suas escolas e famílias.</p>
+       </div><!-- Timeline -->
+       <div class="mt-8 space-y-4">
+        <h3 class="font-heading font-bold text-xl text-gray-900 mb-4">Linha do Tempo</h3>
+        <div class="flex items-center space-x-4">
+         <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+          17
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900">2017 — Fundação</p>
+          <p class="text-sm text-gray-600">Início das atividades em São Paulo</p>
+         </div>
+        </div>
+        <div class="flex items-center space-x-4">
+         <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+          20
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900">2020 — Expansão</p>
+          <p class="text-sm text-gray-600">Abertura do núcleo em São José de Caiana</p>
+         </div>
+        </div>
+        <div class="flex items-center space-x-4">
+         <div class="w-12 h-12 bg-purple-400 rounded-full flex items-center justify-center text-white font-bold">
+          25
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900">2023 — Marco</p>
+          <p class="text-sm text-gray-600">100+ jovens atendidos</p>
+         </div>
+        </div>
+       </div>
+       <div class="mt-8"><a href="#contato" class="btn-secondary px-6 py-3 rounded-full font-semibold inline-flex items-center" style="transform: translateY(-9px);"
+>
+         <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+         </svg> Quero ser Voluntário </a>
+       </div>
+      </div>
+     </div>
+    </div>
+<section id="programas" class="py-20 bg-purple-50">
+  <div class="max-w-screen-2xl mx-auto px-6 sm:px-8 lg:px-10">
+    <div class="text-center mb-16">
+      <span class="text-purple-600 font-semibold text-sm uppercase tracking-wider">
+        O Que Oferecemos
+      </span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mt-2">
+        Nossos Programas
+      </h2>
+    </div>
+
+    <!-- GRID DOS CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <!-- Volleyball Program -->
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover w-full h-full flex flex-col">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-purple-500 to-purple-700 p-8 text-white">
+          <div class="flex items-center space-x-4">
+            <span class="text-6xl">🏐</span>
+            <div>
+              <h3 class="font-heading text-2xl font-bold">Programa de Vôlei</h3>
+              <p class="opacity-80">Formando atletas e cidadãos</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conteúdo -->
+        <div class="p-8 flex-1">
+          <h4 class="font-heading font-bold text-lg text-gray-900 mb-3">Metodologia</h4>
+          <p class="text-gray-600 mb-6">
+            Nosso programa de vôlei combina técnicas modernas de treinamento com desenvolvimento socioemocional.
+            Trabalhamos fundamentos, táticas de jogo e valores como respeito, cooperação e superação.
+          </p>
+
+          <h4 class="font-heading font-bold text-lg text-gray-900 mb-3">Público-Alvo</h4>
+          <p class="text-gray-600 mb-6">Jovens de 6 a 18 anos, divididos em categorias por faixa etária. Não é necessário experiência prévia.</p>
+
+          <!-- Instructor / Usuários -->
+          <div class="bg-purple-50 rounded-xl p-4 flex items-center space-x-4 mb-4">
+            <!-- Avatares empilhados -->
+            <div class="flex flex-col space-y-3">
+              <div class="w-16 h-16 bg-purple-200 rounded-full flex items-center justify-center">
+              <img 
+    src="logo.png" 
+    alt="Projeto ADAM" 
+    class="h-10 w-auto"
+  >
+              </div>
+              <div class="w-16 h-16 bg-purple-200 rounded-full flex items-center justify-center">
+            <img 
+    src="logo.png" 
+    alt="Projeto ADAM" 
+    class="h-10 w-auto"
+  >
+              </div>
+            </div>
+
+            <!-- Blocos "Usuários" (empilhados) -->
+            <div class="flex flex-col justify-center space-y-3">
+              <div>
+                <p class="font-semibold text-purple-700">Erik Albuquerque</p>
+                <p class="text-sm text-purple-600">Instrutor de vôleibol</p>
+              </div>
+            
+              <div>
+                <p class="font-semibold text-purple-700">pessoa</p>
+                <p class="text-sm text-purple-600">Descriçao</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer do card -->
+        <div class="p-6 border-t">
+          <p class="font-semibold text-gray-900">Erik Albuquerque</p>
+          <p class="text-sm text-purple-600">Instrutor de Vôlei</p>
+          <p class="text-xs text-gray-500">Mais de 6 anos de experiência como instrutor de vôlei, formado em Teologia</p>
+          <br>
+            <p class="font-semibold text-gray-900">????</p>
+          <p class="text-sm text-purple-600">????</p>
+          <p class="text-xs text-gray-500">????</p>
+        </div>
+      </article>
+
+      <!-- Soccer Program -->
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover w-full h-full flex flex-col">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-500 to-blue-700 p-8 text-white">
+          <div class="flex items-center space-x-4">
+            <span class="text-6xl">⚽</span>
+            <div>
+              <h3 class="font-heading text-2xl font-bold">Programa de Futebol</h3>
+              <p class="opacity-80">Paixão que transforma</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conteúdo -->
+        <div class="p-8 flex-1">
+          <h4 class="font-heading font-bold text-lg text-gray-900 mb-3">Metodologia</h4>
+          <p class="text-gray-600 mb-6">
+            Treinamento completo que vai além do campo: desenvolvemos habilidades técnicas, táticas e físicas,
+            sempre aliadas ao desenvolvimento do caráter e liderança.
+          </p>
+
+          <h4 class="font-heading font-bold text-lg text-gray-900 mb-3">Público-Alvo</h4>
+          <p class="text-gray-600 mb-6">Jovens de 6 a 18 anos, em categorias por faixa etária.</p>
+
+          <!-- Instructor / Usuários -->
+          <div class="bg-purple-50 rounded-xl p-4 flex items-center space-x-4 mb-4">
+            <!-- Avatares empilhados -->
+            <div class="flex flex-col space-y-3">
+              <div class="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center">
+                <img 
+    src="logo.png" 
+    alt="Projeto ADAM" 
+    class="h-10 w-auto"
+  >
+              </div>
+              <div class="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center">
+              <img 
+    src="logo.png" 
+    alt="Projeto ADAM" 
+    class="h-10 w-auto"
+  >
+              </div>
+            </div>
+
+            <!-- Blocos "Usuários" (empilhados) -->
+            <div class="flex flex-col justify-center space-y-3">
+              <div>
+                <p class="font-semibold text-blue-700">José Lourenço</p>
+                <p class="text-sm text-blue-600">Instrutor de Futebol</p>
+              </div>
+
+              <div>
+                <p class="font-semibold text-blue-700">????</p>
+                <p class="text-sm text-blue-600">????</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer do card -->
+        <div class="p-6 border-t">
+          <p class="font-semibold text-gray-900">José Lourenço</p>
+          <p class="text-sm text-blue-600">Instrutor de Futebol</p>
+          <p class="text-xs text-gray-500">Mais de 6 anos de experiência como instrutor de vôlei</p>
+          <br>
+          <p class="font-semibold text-gray-900">????</p>
+          <p class="text-sm text-blue-600">????</p>
+          <p class="text-xs text-gray-500">????</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+
+
+     </div><!-- Schedule Tables -->
+     <div class="mt-16">
+      <h3 class="font-heading text-2xl font-bold text-gray-900 text-center mb-8">Horários de Treino</h3>
+      <div class="grid lg:grid-cols-2 gap-8"><!-- São Paulo Schedule -->
+       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="bg-purple-600 text-white p-4">
+         <h4 class="font-heading font-bold text-xl"> São Paulo</h4>
+        </div>
+        <div class="overflow-x-auto">
+         <table class="schedule-table w-full">
+          <thead>
+           <tr>
+            <th class="px-4 py-3 text-left">Modalidade</th>
+            <th class="px-4 py-3 text-left">Dia</th>
+            <th class="px-4 py-3 text-left">Horário</th>
+            <th class="px-4 py-3 text-left">Local</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="px-4 py-3">🏐 Vôlei Infantil</td>
+            <td class="px-4 py-3">Terça e Quinta</td>
+            <td class="px-4 py-3">14:00 - 16:00</td>
+            <td class="px-4 py-3">Quadra Principal</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3">🏐 Vôlei Juvenil</td>
+            <td class="px-4 py-3">Segunda e Quarta</td>
+            <td class="px-4 py-3">16:00 - 18:00</td>
+            <td class="px-4 py-3">Quadra Principal</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3">⚽ Futebol Infantil</td>
+            <td class="px-4 py-3">Terça e Quinta</td>
+            <td class="px-4 py-3">09:00 - 11:00</td>
+            <td class="px-4 py-3">Campo Anexo</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3">⚽ Futebol Juvenil</td>
+            <td class="px-4 py-3">Segunda e Sexta</td>
+            <td class="px-4 py-3">17:00 - 19:00</td>
+            <td class="px-4 py-3">Campo Anexo</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div><!-- São José de Caiana Schedule -->
+       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="bg-purple-600 text-white p-4">
+         <h4 class="font-heading font-bold text-xl"> São José de Caiana</h4>
+        </div>
+        <div class="overflow-x-auto">
+         <table class="schedule-table w-full">
+          <thead>
+           <tr>
+            <th class="px-4 py-3 text-left">Modalidade</th>
+            <th class="px-4 py-3 text-left">Dia</th>
+            <th class="px-4 py-3 text-left">Horário</th>
+            <th class="px-4 py-3 text-left">Local</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="px-4 py-3">🏐 Vôlei de Sábado</td>
+            <td class="px-4 py-3">Sábado</td>
+            <td class="px-4 py-3">Sábado 07:30 - 09:30</td>
+            <td class="px-4 py-3">Campo ADAM</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3">🏐 Vôlei de Terça</td>
+            <td class="px-4 py-3">Terça</td>
+            <td class="px-4 py-3">Terça 17:30 - 19:30</td>
+            <td class="px-4 py-3">Área de lazer Juazeiro</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3">⚽ Futebol de Quinta</td>
+            <td class="px-4 py-3">Quinta</td>
+            <td class="px-4 py-3">17:30 - 20:00</td>
+            <td class="px-4 py-3">Área de lazer Juazeiro</td>
+           </tr>
+           <tr>
+            <td class="px-4 py-3">⚽ Futebol de Sexta</td>
+            <td class="px-4 py-3">Sexta</td>
+            <td class="px-4 py-3">16:30 - 17:30</td>
+            <td class="px-4 py-3">Área de lazer Juazeiro</td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+  <section id="locais" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- grid: 1 coluna no mobile, 2 colunas a partir de md -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Card 1 -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover">
+        <div class="bg-gradient-to-br from-purple-500 to-purple-700 h-24 flex items-center justify-center relative">
+          <div class="text-center text-white">
+            <span class="text-5xl mb-2 block"></span>
+                      <h3 class="text-2xl md:text-3xl font-extrabold">
+ Atibaia/SP
+</h3>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <!-- iframe responsivo -->
+          <div class="mb-4">
+            <iframe
+              class="w-full h-64 border-0"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20754.068358301032!2d-46.595092402415816!3d-23.13968301786152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cec15d6005bb93%3A0xf4d689898c453777!2sR.%20Casemiro%20de%20Abreu%2C%20391%20-%20Jardim%20das%20Cerejeiras%2C%20Atibaia%20-%20SP%2C%2012951-170!5e0!3m2!1spt-BR!2sbr!4v1769178690946!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+
+          <a class="inline-flex items-center text-sm text-green-600 mb-2" href="https://www.google.com/maps?ll=-23.130959,-46.584905&z=13&t=m&hl=pt-BR&gl=BR&mapclient=embed&q=R.+Casemiro+de+Abreu,+391+-+Jardim+das+Cerejeiras+Atibaia+-+SP+12951-170">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.71 11.29l-9-9a.996.996 0 00-1.41 0l-9 9a.996.996 0 000 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 000-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/>
+            </svg>
+            Como Chegar
+          </a>
+
+          <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">São José de Caiana - PB</h3>
+          <p class="text-gray-600">R. Casemiro de Abreu, 391 - Jardim das Cerejeiras, Atibaia - SP<br>CEP: 12951-170</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover">
+        <div class="bg-gradient-to-br from-purple-500 to-purple-700 h-24 flex items-center justify-center relative">
+          <div class="text-center text-white">
+            <span class="text-10xl mb-2 block"></span>
+            <h3 class="text-2xl md:text-3xl font-extrabold">
+  São José de Caiana/PB
+</h3>
+
+          </div>
+        </div>
+
+        <div class="p-4">
+          <div class="mb-4">
+            <iframe
+              class="w-full h-64 border-0"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d832.0498252992448!2d-38.30572457537487!3d-7.250140301714429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a69fef1dcdb12b%3A0x81439d0039b0e9ac!2sCampo%20de%20Futebol!5e0!3m2!1spt-BR!2sbr!4v1769107961750!5m2!1spt-BR!2sbr"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+
+          <a class="inline-flex items-center text-sm text-green-600 mb-2" href="https://www.google.com/maps?ll=-7.249807,-38.305749&z=18&t=m&hl=pt-BR&gl=BR&mapclient=embed&cid=9314461078625773996">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.71 11.29l-9-9a.996.996 0 00-1.41 0l-9 9a.996.996 0 000 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 000-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/>
+            </svg>
+            Como Chegar
+          </a>
+
+          <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">São José de Caiana - PB</h3>
+          <p class="text-gray-600">Campo de Futebol<br>CEP: 58784-000</p>
+        </div>
+      </div>
+
+    </div> <!-- fim grid -->
+  </div>
+</section>
+
+ <section id="galeria" class="py-20 bg-purple-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-16">
+      <span class="text-purple-600 font-semibold text-sm uppercase tracking-wider">
+        Momentos Especiais
+      </span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mt-2">
+        Galeria de Fotos
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+      <!-- ITEM -->
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="AdamCaiana.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="AdamPaulo1.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="AdamPaulo2.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="Trofeu.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="Adam1.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="Adam2.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="Adam3.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+      <div class="gallery-item aspect-square cursor-pointer" onclick="openLightbox(this)">
+        <img src="Adam4.png" alt="Foto da galeria"
+             class="w-full h-full object-cover rounded-xl">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    </div>
+ <div id="lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+  <span class="absolute top-6 right-6 text-white text-4xl cursor-pointer" onclick="closeLightbox()">×</span>
+
+  <img id="lightbox-img" class="max-w-[90%] max-h-[90%] rounded-xl">
+</div>
+
+   </div><!-- Donations Section -->
+   <section id="doacoes" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16"><span class="text-purple-600 font-semibold text-sm uppercase tracking-wider">Faça a Diferença</span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mt-2">Apoie Nossa Causa</h2>
+     </div>
+     <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+       <h3 class="font-heading text-2xl font-bold text-gray-900 mb-6">Por que doar?</h3>
+       <p class="text-gray-600 mb-6 leading-relaxed">Sua doação compra bolas, redes, uniformes e equipamentos. Financia o transporte de jovens para competições. Capacita nossos instrutores. Mantém nossas quadras e campos em condições adequadas. Cada contribuição faz a diferença na vida de um jovem.</p>
+      <div class="space-y-4 mb-8">
+
+  <div class="flex items-center space-x-4">
+    <div>
+      <p class="font-semibold text-gray-900">R$ 50</p>
+      <p class="text-sm text-gray-600">Comprar bolas melhores</p>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <div>
+      <p class="font-semibold text-gray-900">R$ 100</p>
+      <p class="text-sm text-gray-600">Patrocina mais uniformes</p>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <div>
+      <p class="font-semibold text-gray-900">R$ 200</p>
+      <p class="text-sm text-gray-600">Transporte para competição</p>
+    </div>
+  </div>
+
+</div>
+
+    
+      <!-- Donation PIX -->
+<div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 text-center">
+
+  <h3 class="font-heading text-2xl font-bold text-gray-900 mb-6">
+    Doe via PIX 💜
+  </h3>
+
+  <!-- Botão PIX -->
+  <button
+    type="button"
+    onclick="togglePix()"
+    class="w-full py-4 rounded-xl border-2 border-purple-600 text-purple-700 font-bold text-lg hover:bg-purple-600 hover:text-white transition-all">
+    📱 Doar com PIX
+  </button>
+
+  <!-- PIX Info -->
+  <div id="pix-info" class="hidden mt-6 bg-purple-50 rounded-xl p-4">
+    <p class="font-semibold text-gray-900 mb-2">Chave PIX:</p>
+
+    <div class="bg-white rounded-lg p-3 flex items-center justify-between">
+      <code id="pix-key" class="text-purple-700 font-mono text-sm">
+        adam.atibaia@gmail.com
+      </code>
+
+      <button onclick="copyPix()" class="text-purple-600 hover:text-purple-800">
+        📋
+      </button>
+    </div>
+
+    <p class="text-sm text-gray-600 mt-3">
+      Toque para copiar a chave PIX
+    </p>
+  </div>
+
+     </div><!-- Transparency -->
+       <br>
+  <br>
+       <div class="bg-purple-50 rounded-xl p-6">
+        <div class="flex items-center space-x-3 mb-3">
+         <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewbox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+         </svg>
+         <h4 class="font-heading font-bold text-gray-900">Transparência</h4>
+        </div>
+        <p class="text-gray-600 text-sm">Publicamos relatórios trimestrais de prestação de contas. <a href="#" class="text-purple-600 hover:underline font-medium">Acesse aqui (PDF)</a></p>
+       </div>
+
+</div>
+
+   </section><!-- Contact Section -->
+   <section id="contato" class="py-20 bg-purple-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16"><span class="text-purple-600 font-semibold text-sm uppercase tracking-wider">Fale Conosco</span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mt-2">Entre em Contato</h2>
+     </div>
+     <div class="grid lg:grid-cols-2 gap-12"><!-- Contact Info -->
+      <div>
+       <div class="bg-white rounded-3xl shadow-lg p-8">
+        <h3 class="font-heading text-xl font-bold text-gray-900 mb-6">Informações de Contato</h3>
+        <div class="space-y-6">
+         <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+           <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+           </svg>
+          </div>
+          <div>
+           <p class="font-semibold text-gray-900">E-mail</p><a href="mailto:adam.atibaia@gmail.com" class="text-purple-600 hover:underline">contato@projetoadam.org.br</a>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+           <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewbox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+           </svg>
+          </div>
+          <div>
+           <p class="font-semibold text-gray-900">Telefone</p>
+           <p class="text-gray-600">(11) 98375-1970</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+           <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewbox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+           </svg>
+          </div>
+          <div>
+           <p class="font-semibold text-gray-900">Horário de Atendimento</p>
+           <p class="text-gray-600">Segunda a Sexta: 9h às 18h</p>
+           <p class="text-gray-600">Sábado: 9h às 12h</p>
+          </div>
+         </div>
+        </div><!-- Social Media -->
+     <div class="mt-8 pt-8 border-t border-gray-200">
+  <p class="font-semibold text-gray-900 mb-4">
+    Siga-nos nas redes sociais
+  </p>
+
+  <div class="flex space-x-4">
+    
+    <!-- Instagram -->
+ <a
+  href="https://www.instagram.com/adamsports_/"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700 transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-5 h-5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <path d="M16 11.37a4 4 0 1 1-2.37-2.37"/>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </svg>
+</a>
+
+
+    <!-- Facebook -->
+    <a
+      href="https://www.facebook.com/projetoadamsports/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700 transition-colors"
+    >
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+      </svg>
+    </a>
+
+  </div>
+</div>
+
+         </div>
+        </div>
+       </div>
+      </div><!-- Contact Form -->
+      <br>
+      <div class="bg-white rounded-3xl shadow-lg p-8">
+       <h3 class="font-heading text-xl font-bold text-gray-900 mb-6">Envie uma Mensagem</h3>
+       <form id="contact-form" class="space-y-6">
+        <div><label for="contact-name" class="block text-sm font-medium text-gray-700 mb-1">Nome completo *</label> <input type="text" id="contact-name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Seu nome">
+        </div>
+        <div><label for="contact-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail *</label> <input type="email" id="contact-email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="seu@email.com">
+        </div>
+        <div><label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-1">Assunto *</label> <select id="contact-subject" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent"> <option value="">Selecione um assunto</option> <option value="voluntariado">Quero ser voluntário</option> <option value="inscricao">Inscrição de atleta</option> <option value="parceria">Proposta de parceria</option> <option value="doacao">Dúvidas sobre doação</option> <option value="outro">Outro assunto</option> </select>
+        </div>
+        <div><label for="contact-message" class="block text-sm font-medium text-gray-700 mb-1">Mensagem *</label> <textarea id="contact-message" required rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none" placeholder="Escreva sua mensagem..."></textarea>
+        </div><button type="submit" id="contact-submit-btn" class="btn-primary w-full py-4 rounded-full font-bold text-lg flex items-center justify-center">
+         <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+         </svg><span id="contact-btn-text">Enviar Mensagem</span> </button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="bg-gray-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid md:grid-cols-4 gap-12">
+      <div>
+     <div class="flex items-center space-x-3">
+  <img 
+    src="logo.png" 
+    alt="Projeto ADAM" 
+    class="h-10 w-auto"
+  >
+  <span id="nav-logo-text" class="font-heading font-bold text-xl">
+    Projeto ADAM
+  </span>
+</div>
+       <p class="text-gray-400 text-sm leading-relaxed">Transformando vidas através do esporte desde 2015. Formando atletas e cidadãos.</p>
+      </div>
+      <div>
+       <h4 class="font-heading font-bold text-lg mb-4">Links Rápidos</h4>
+       <ul class="space-y-2 text-gray-400">
+        <li><a href="#home" class="hover:text-purple-400 transition-colors">Início</a></li>
+        <li><a href="#sobre" class="hover:text-purple-400 transition-colors">Sobre</a></li>
+        <li><a href="#programas" class="hover:text-purple-400 transition-colors">Programas</a></li>
+        <li><a href="#galeria" class="hover:text-purple-400 transition-colors">Galeria</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-heading font-bold text-lg mb-4">Apoie</h4>
+       <ul class="space-y-2 text-gray-400">
+        <li><a href="#doacoes" class="hover:text-purple-400 transition-colors">Faça uma Doação</a></li>
+        <li><a href="#contato" class="hover:text-purple-400 transition-colors">Seja Voluntário</a></li>
+        <li><a href="#" class="hover:text-purple-400 transition-colors">Parcerias</a></li>
+        <li><a href="#" class="hover:text-purple-400 transition-colors">Transparência</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-heading font-bold text-lg mb-4">Contato</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li>contato@projetoadam.org.br</li>
+        <li>(11) 99999-0000</li>
+        <li>São Paulo, SP</li>
+        <li>São José de Caiana, PB</li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-500 text-sm">© 2024 Projeto ADAM. Todos os direitos reservados.</p>
+      <div class="flex space-x-6 mt-4 md:mt-0"><a href="#doacoes" class="btn-primary px-6 py-2 rounded-full font-semibold text-sm">Doe Agora</a>
+      </div>
+     </div>
+    </div>
+   </footer><!-- Toast Notification -->
+   <div id="toast" class="toast"></div><!-- Confirmation Modal -->
+   <div id="confirmation-modal" class="confirmation-modal">
+    <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center">
+     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <svg class="w-8 h-8 text-green-600" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+      </svg>
+     </div>
+     <h3 class="font-heading text-xl font-bold text-gray-900 mb-2">Obrigado!</h3>
+     <p id="modal-message" class="text-gray-600 mb-6">Sua mensagem foi enviada com sucesso.</p><button onclick="closeModal()" class="btn-primary px-8 py-3 rounded-full font-semibold">Fechar</button>
+    </div>
+   </div>
+  </div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      hero_title: 'Projeto ADAM',
+      hero_subtitle: 'Transformando vidas pelo esporte — oferecendo oportunidades através do vôlei e futebol para jovens em comunidades.',
+      mission_text: 'Acreditamos que o esporte é uma poderosa ferramenta de transformação social. Nossa missão é proporcionar a jovens em situação de vulnerabilidade acesso a treinamento esportivo de qualidade, promovendo disciplina, trabalho em equipe e desenvolvimento pessoal através do vôlei e futebol.',
+      cta_donate: 'Doe Agora',
+      cta_participate: 'Participe',
+      background_color: '#FFFFFF',
+      surface_color: '#F5E6FF',
+      text_color: '#333333',
+      primary_action_color: '#6A0DAD',
+      secondary_action_color: '#9B59B6',
+      font_family: 'Inter',
+      font_size: 16
+    };
+    
+    let config = { ...defaultConfig };
+    let contactData = [];
+    let donationData = [];
+    
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        // Filter data by type
+        contactData = data.filter(item => item.type === 'contact');
+        donationData = data.filter(item => item.type === 'donation');
+      }
+    };
+    
+    // Initialize SDKs
+    async function initializeApp() {
+      // Initialize Data SDK
+      if (window.dataSdk) {
+        const dataResult = await window.dataSdk.init(dataHandler);
+        if (!dataResult.isOk) {
+          console.error('Failed to initialize Data SDK');
+        }
+      }
+      
+      // Initialize Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (newConfig) => {
+            config = { ...defaultConfig, ...newConfig };
+            applyConfig();
+          },
+          mapToCapabilities: (cfg) => ({
+            recolorables: [
+              {
+                get: () => cfg.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  cfg.background_color = value;
+                  window.elementSdk.setConfig({ background_color: value });
+                }
+              },
+              {
+                get: () => cfg.surface_color || defaultConfig.surface_color,
+                set: (value) => {
+                  cfg.surface_color = value;
+                  window.elementSdk.setConfig({ surface_color: value });
+                }
+              },
+              {
+                get: () => cfg.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  cfg.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                }
+              },
+              {
+                get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
+                set: (value) => {
+                  cfg.primary_action_color = value;
+                  window.elementSdk.setConfig({ primary_action_color: value });
+                }
+              },
+              {
+                get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
+                set: (value) => {
+                  cfg.secondary_action_color = value;
+                  window.elementSdk.setConfig({ secondary_action_color: value });
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => cfg.font_family || defaultConfig.font_family,
+              set: (value) => {
+                cfg.font_family = value;
+                window.elementSdk.setConfig({ font_family: value });
+              }
+            },
+            fontSizeable: {
+              get: () => cfg.font_size || defaultConfig.font_size,
+              set: (value) => {
+                cfg.font_size = value;
+                window.elementSdk.setConfig({ font_size: value });
+              }
+            }
+          }),
+          mapToEditPanelValues: (cfg) => new Map([
+            ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+            ['hero_subtitle', cfg.hero_subtitle || defaultConfig.hero_subtitle],
+            ['mission_text', cfg.mission_text || defaultConfig.mission_text],
+            ['cta_donate', cfg.cta_donate || defaultConfig.cta_donate],
+            ['cta_participate', cfg.cta_participate || defaultConfig.cta_participate]
+          ])
+        });
+      }
+      
+      // Initialize UI
+      initializeUI();
+    }
+    
+    // Apply configuration changes
+    function applyConfig() {
+      const heroTitle = document.getElementById('hero-title');
+      const heroSubtitle = document.getElementById('hero-subtitle');
+      const missionText = document.getElementById('mission-text');
+      const heroBtnDonate = document.getElementById('hero-btn-donate');
+      const heroBtnParticipate = document.getElementById('hero-btn-participate');
+      
+      if (heroTitle) heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+      if (heroSubtitle) heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      if (missionText) missionText.textContent = config.mission_text || defaultConfig.mission_text;
+      
+      // Update button text
+      if (heroBtnDonate) {
+        const btnText = heroBtnDonate.querySelector('span') || heroBtnDonate;
+        if (heroBtnDonate.childNodes.length > 1) {
+          heroBtnDonate.lastChild.textContent = ' ' + (config.cta_donate || defaultConfig.cta_donate);
+        }
+      }
+      
+      if (heroBtnParticipate) {
+        const btnText = heroBtnParticipate.querySelector('span') || heroBtnParticipate;
+        if (heroBtnParticipate.childNodes.length > 1) {
+          heroBtnParticipate.lastChild.textContent = ' ' + (config.cta_participate || defaultConfig.cta_participate);
+        }
+      }
+      
+      // Apply colors
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      const fontSize = config.font_size || defaultConfig.font_size;
+      
+      document.body.style.backgroundColor = backgroundColor;
+      document.body.style.fontFamily = `${fontFamily}, Inter, sans-serif`;
+      document.body.style.fontSize = `${fontSize}px`;
+      
+      // Update primary buttons
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.style.backgroundColor = primaryColor;
+      });
+      
+      // Update text color
+      document.querySelectorAll('h1, h2, h3, h4, p').forEach(el => {
+        if (!el.closest('.bg-purple-600') && !el.closest('.bg-green-600') && !el.closest('.bg-gray-900')) {
+          el.style.color = textColor;
+        }
+      });
+    }
+    
+    // Initialize UI interactions
+    function initializeUI() {
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+          });
+        });
+      }
+      
+      // Donation form handling
+      initDonationForm();
+      
+      // Contact form handling
+      initContactForm();
+      
+      // Copy PIX functionality
+      const copyPixBtn = document.getElementById('copy-pix');
+      if (copyPixBtn) {
+        copyPixBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText('doacoes@projetoadam.org.br');
+          showToast('Chave PIX copiada!', 'success');
+        });
+      }
+    }
+    
+    // Donation form
+    function initDonationForm() {
+      let selectedAmount = 0;
+      let selectedMethod = '';
+      
+      // Amount buttons
+      document.querySelectorAll('.donation-amount-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.donation-amount-btn').forEach(b => {
+            b.classList.remove('border-purple-600', 'bg-purple-50');
+          });
+          btn.classList.add('border-purple-600', 'bg-purple-50');
+          selectedAmount = parseInt(btn.dataset.amount);
+          document.getElementById('custom-amount').value = '';
+        });
+      });
+      
+      // Custom amount
+      const customAmount = document.getElementById('custom-amount');
+      if (customAmount) {
+        customAmount.addEventListener('input', () => {
+          document.querySelectorAll('.donation-amount-btn').forEach(b => {
+            b.classList.remove('border-purple-600', 'bg-purple-50');
+          });
+          selectedAmount = parseInt(customAmount.value) || 0;
+        });
+      }
+      
+      // Payment method buttons
+      document.querySelectorAll('.payment-method-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.payment-method-btn').forEach(b => {
+            b.classList.remove('border-purple-600', 'bg-purple-50');
+          });
+          btn.classList.add('border-purple-600', 'bg-purple-50');
+          selectedMethod = btn.dataset.method;
+          
+          // Show/hide PIX info
+          const pixInfo = document.getElementById('pix-info');
+          if (pixInfo) {
+            pixInfo.classList.toggle('hidden', selectedMethod !== 'pix');
+          }
+        });
+      });
+      
+      // Form submission
+      const donationForm = document.getElementById('donation-form');
+      if (donationForm) {
+        donationForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const name = document.getElementById('donor-name').value.trim();
+          const email = document.getElementById('donor-email').value.trim();
+          
+          if (!selectedAmount || selectedAmount <= 0) {
+            showToast('Por favor, selecione um valor para doação.', 'error');
+            return;
+          }
+          
+          if (!selectedMethod) {
+            showToast('Por favor, selecione uma forma de pagamento.', 'error');
+            return;
+          }
+          
+          if (!name || !email) {
+            showToast('Por favor, preencha seu nome e e-mail.', 'error');
+            return;
+          }
+          
+          const donateBtn = document.getElementById('donate-btn');
+          const donateBtnText = document.getElementById('donate-btn-text');
+          donateBtn.disabled = true;
+          donateBtnText.textContent = 'Processando...';
+          
+          // Check data limit
+          if (window.dataSdk && donationData.length >= 999) {
+            showToast('Limite de registros atingido. Por favor, entre em contato conosco.', 'error');
+            donateBtn.disabled = false;
+            donateBtnText.textContent = 'Doe Agora';
+            return;
+          }
+          
+          // Save to Data SDK
+          if (window.dataSdk) {
+            const result = await window.dataSdk.create({
+              type: 'donation',
+              name: name,
+              email: email,
+              subject: '',
+              message: '',
+              donation_amount: selectedAmount,
+              payment_method: selectedMethod,
+              created_at: new Date().toISOString()
+            });
+            
+            if (result.isOk) {
+              showModal('Obrigado por sua doação de R$ ' + selectedAmount + '! Um recibo será enviado para ' + email + '.');
+              donationForm.reset();
+              selectedAmount = 0;
+              selectedMethod = '';
+              document.querySelectorAll('.donation-amount-btn, .payment-method-btn').forEach(b => {
+                b.classList.remove('border-purple-600', 'bg-purple-50');
+              });
+              document.getElementById('pix-info').classList.add('hidden');
+            } else {
+              showToast('Erro ao processar doação. Tente novamente.', 'error');
+            }
+          } else {
+            // Fallback without SDK
+            showModal('Obrigado por sua doação de R$ ' + selectedAmount + '! Um recibo será enviado para ' + email + '.');
+            donationForm.reset();
+          }
+          
+          donateBtn.disabled = false;
+          donateBtnText.textContent = 'Doe Agora';
+        });
+      }
+    }
+    
+    // Contact form
+    function initContactForm() {
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const name = document.getElementById('contact-name').value.trim();
+          const email = document.getElementById('contact-email').value.trim();
+          const subject = document.getElementById('contact-subject').value;
+          const message = document.getElementById('contact-message').value.trim();
+          
+          if (!name || !email || !subject || !message) {
+            showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
+            return;
+          }
+          
+          const submitBtn = document.getElementById('contact-submit-btn');
+          const submitBtnText = document.getElementById('contact-btn-text');
+          submitBtn.disabled = true;
+          submitBtnText.textContent = 'Enviando...';
+          
+          // Check data limit
+          if (window.dataSdk && contactData.length >= 999) {
+            showToast('Limite de mensagens atingido. Por favor, entre em contato por telefone.', 'error');
+            submitBtn.disabled = false;
+            submitBtnText.textContent = 'Enviar Mensagem';
+            return;
+          }
+          
+          // Save to Data SDK
+          if (window.dataSdk) {
+            const result = await window.dataSdk.create({
+              type: 'contact',
+              name: name,
+              email: email,
+              subject: subject,
+              message: message,
+              donation_amount: 0,
+              payment_method: '',
+              created_at: new Date().toISOString()
+            });
+            
+            if (result.isOk) {
+              showModal('Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.');
+              contactForm.reset();
+            } else {
+              showToast('Erro ao enviar mensagem. Tente novamente.', 'error');
+            }
+          } else {
+            // Fallback without SDK
+            showModal('Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.');
+            contactForm.reset();
+          }
+          
+          submitBtn.disabled = false;
+          submitBtnText.textContent = 'Enviar Mensagem';
+        });
+      }
+    }
+    
+    // Toast notification
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      if (toast) {
+        toast.textContent = message;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+    }
+    
+    // Modal
+    function showModal(message) {
+      const modal = document.getElementById('confirmation-modal');
+      const modalMessage = document.getElementById('modal-message');
+      if (modal && modalMessage) {
+        modalMessage.textContent = message;
+        modal.classList.add('active');
+      }
+    }
+    
+    function closeModal() {
+      const modal = document.getElementById('confirmation-modal');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+    
+    // Lightbox
+    function openLightbox(element) {
+      const lightbox = document.getElementById('lightbox');
+      const content = document.getElementById('lightbox-content');
+      if (lightbox && content) {
+        const caption = element.querySelector('p.sr-only');
+        content.innerHTML = `
+          <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-96 h-96 rounded-xl flex items-center justify-center">
+            <p class="text-white text-xl">${caption ? caption.textContent : 'Imagem da galeria'}</p>
+          </div>
+        `;
+        lightbox.classList.add('active');
+      }
+    }
+    
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox) {
+        lightbox.classList.remove('active');
+      }
+    }
+    
+    // Close lightbox on click outside
+    document.addEventListener('click', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    
+    // Close modal on click outside
+    document.addEventListener('click', (e) => {
+      const modal = document.getElementById('confirmation-modal');
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // Initialize app
+    initializeApp();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
