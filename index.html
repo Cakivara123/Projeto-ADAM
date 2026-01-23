@@ -911,7 +911,7 @@
            </svg>
           </div>
           <div>
-           <p class="font-semibold text-gray-900">E-mail</p><a href="mailto:adam.atibaia@gmail.com" class="text-purple-600 hover:underline">contato@projetoadam.org.br</a>
+           <p class="font-semibold text-gray-900">E-mail</p><a href="mailto:heitorbrito671@gmail.com" class="text-purple-600 hover:underline">adam.atibaia@gmail.com</a>
           </div>
          </div>
          <div class="flex items-start space-x-4">
@@ -1479,47 +1479,48 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 
-<script src="https://cdn.jsdelivr.net/npm/emailjs@4/dist/email.min.js" defer></script>
+<!-- Esta é a versão correta da biblioteca EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
 
 <script>
-/* Versão mínima: envia name, email e message para o template */
-const SERVICE_ID = 'service_ktlcjpv';
-const TEMPLATE_ID = 'template_9jv3kca';
-const PUBLIC_KEY = 'PyBDtOAys9UNPa8d6';
+document.addEventListener("DOMContentLoaded", function () {
+  if (!window.emailjs) {
+    console.error("EmailJS não carregou");
+    return;
+  }
 
-window.addEventListener('load', () => {
-  if (!window.emailjs) { console.error('EmailJS não carregou'); return; }
-  emailjs.init(PUBLIC_KEY);
+  emailjs.init("PyBDtOAys9UNPa8d6");
 
-  const form = document.getElementById('contact-form');
+  const form = document.getElementById("contact-form");
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const name = (document.getElementById('contact-name')?.value || '').trim();
-    const email = (document.getElementById('contact-email')?.value || '').trim();
-    const message = (document.getElementById('contact-message')?.value || '').trim();
+    const name = document.getElementById("contact-name").value.trim();
+    const email = document.getElementById("contact-email").value.trim();
+    const message = document.getElementById("contact-message").value.trim();
 
     if (!name || !email || !message) {
-      alert('Preencha nome, e-mail e mensagem.');
+      alert("Preencha nome, e-mail e mensagem.");
       return;
     }
 
-    const templateParams = { name, email, message };
-
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
-      .then(() => {
-        alert('Mensagem enviada!');
-        form.reset();
-      })
-      .catch((err) => {
-        console.error('Erro EmailJS:', err);
-        alert('Erro ao enviar. Veja console.');
-      });
+    emailjs.send(
+      "service_ktlcjpv",
+      "template_9jv3kca",
+      { name, email, message }
+    ).then(() => {
+      alert("Mensagem enviada!");
+      form.reset();
+    }).catch((err) => {
+      console.error("Erro EmailJS:", err);
+      alert("Erro ao enviar. Veja console.");
+    });
   });
 });
 </script>
+
 
 
  </body>
