@@ -21,10 +21,21 @@
     alert('Chave PIX copiada!');
   }
 </script>
+  <style>
+/* Apenas em celular */
+@media (max-width: 640px) {
+  body {
+    transform: scale(0.75); /* diminui ~4x o espaçamento/tamanho */
+    transform-origin: top left;
+    width: 133.33%; /* corrige a largura após o scale */
+  }
+}
+</style>
+
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
-    
+      
     body {
       box-sizing: border-box;
     }
