@@ -1478,62 +1478,49 @@
     
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
- <script src="https://cdn.jsdelivr.net/npm/emailjs@4/dist/email.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs@4/dist/email.min.js" defer></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+/* Versão mínima: envia name, email e message para o template */
+const SERVICE_ID = 'service_ktlcjpv';
+const TEMPLATE_ID = 'template_9jv3kca';
+const PUBLIC_KEY = 'PyBDtOAys9UNPa8d6';
 
-  // Inicializa o EmailJS (apenas uma vez)
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init("PyBDtOAys9UNPa8d6");
-  } else {
-    console.error('EmailJS não carregado');
-    return;
-  }
+window.addEventListener('load', () => {
+  if (!window.emailjs) { console.error('EmailJS não carregou'); return; }
+  emailjs.init(PUBLIC_KEY);
 
-  // Inicializa formulário de contato
-  var contactForm = document.getElementById('contact-form');
-  if (!contactForm) return;
+  const form = document.getElementById('contact-form');
+  if (!form) return;
 
-  contactForm.addEventListener('submit', function (e) {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    var submitBtn = document.getElementById('contact-submit-btn');
-    var submitBtnText = document.getElementById('contact-btn-text');
+    const name = (document.getElementById('contact-name')?.value || '').trim();
+    const email = (document.getElementById('contact-email')?.value || '').trim();
+    const message = (document.getElementById('contact-message')?.value || '').trim();
 
-    if (submitBtn) submitBtn.disabled = true;
-    if (submitBtnText) submitBtnText.textContent = 'Enviando...';
+    if (!name || !email || !message) {
+      alert('Preencha nome, e-mail e mensagem.');
+      return;
+    }
 
-    var nameEl = document.getElementById('contact-name');
-    var emailEl = document.getElementById('contact-email');
-    var subjectEl = document.getElementById('contact-subject');
-    var messageEl = document.getElementById('contact-message');
+    const templateParams = { name, email, message };
 
-    var params = {
-      name: nameEl ? nameEl.value.trim() : '',
-      email: emailEl ? emailEl.value.trim() : '',
-      subject: subjectEl ? subjectEl.value : '',
-      message: messageEl ? messageEl.value.trim() : ''
-    };
-
-    // envie
-    emailjs.send('service_ktlcjpv', 'template_9jv3kca', params)
-      .then(function (resp) {
-        if (typeof showModal === 'function') showModal('Sua mensagem foi enviada com sucesso!');
-        contactForm.reset();
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+      .then(() => {
+        alert('Mensagem enviada!');
+        form.reset();
       })
-      .catch(function (error) {
-        console.error('EmailJS erro:', error);
-        if (typeof showToast === 'function') showToast('Erro ao enviar a mensagem. Tente novamente.', 'error');
-      })
-      .finally(function () {
-        if (submitBtn) submitBtn.disabled = false;
-        if (submitBtnText) submitBtnText.textContent = 'Enviar Mensagem';
+      .catch((err) => {
+        console.error('Erro EmailJS:', err);
+        alert('Erro ao enviar. Veja console.');
       });
   });
-
 });
 </script>
+
 
  </body>
 </html>
