@@ -14,13 +14,62 @@
   function togglePix() {
     document.getElementById('pix-info').classList.toggle('hidden');
   }
-
+  
   function copyPix() {
     const pixKey = document.getElementById('pix-key').innerText;
     navigator.clipboard.writeText(pixKey);
     alert('Chave PIX copiada!');
   }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs@4/dist/email.min.js"></script>
+<script>
+  emailjs.init("PyBDtOAys9UNPa8d6");
+</script>
+<script>
+function initContactForm() {
+  const contactForm = document.getElementById('contact-form');
+  if (!contactForm) return;
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const submitBtnText = document.getElementById('contact-btn-text');
+
+    submitBtn.disabled = true;
+    submitBtnText.textContent = 'Enviando...';
+
+    const params = {
+      name: document.getElementById('contact-name').value,
+      email: document.getElementById('contact-email').value,
+      subject: document.getElementById('contact-subject').value,
+      message: document.getElementById('contact-message').value
+    };
+
+    emailjs.send(
+      'service_ktlcjpv',
+      'template_9jv3kca',
+      params
+    )
+    .then(() => {
+      showModal('Sua mensagem foi enviada com sucesso!');
+      contactForm.reset();
+    })
+    .catch((error) => {
+      console.error('EmailJS erro:', error);
+      showToast('Erro ao enviar a mensagem. Tente novamente.', 'error');
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtnText.textContent = 'Enviar Mensagem';
+    });
+  });
+}
+
+// ⚠️ ESSENCIAL
+initContactForm();
+</script>
+
   <style>
 /* Apenas em celular */
 @media (max-width: 640px) {
@@ -911,7 +960,7 @@
            </svg>
           </div>
           <div>
-           <p class="font-semibold text-gray-900">E-mail</p><a href="mailto:adam.atibaia@gmail.com" class="text-purple-600 hover:underline">adam.atibaia@gmail.com</a>
+           <p class="font-semibold text-gray-900">E-mail</p><a href="mailto:adam.atibaia@gmail.com" class="text-purple-600 hover:underline">contato@projetoadam.org.br</a>
           </div>
          </div>
          <div class="flex items-start space-x-4">
@@ -1017,7 +1066,7 @@
     Projeto ADAM
   </span>
 </div>
-       <p class="text-gray-400 text-sm leading-relaxed">Transformando vidas através do esporte desde 2017. Formando atletas e cidadãos.</p>
+       <p class="text-gray-400 text-sm leading-relaxed">Transformando vidas através do esporte desde 2015. Formando atletas e cidadãos.</p>
       </div>
       <div>
        <h4 class="font-heading font-bold text-lg mb-4">Links Rápidos</h4>
@@ -1040,15 +1089,15 @@
       <div>
        <h4 class="font-heading font-bold text-lg mb-4">Contato</h4>
        <ul class="space-y-2 text-gray-400 text-sm">
-        <li>adam.atibaia@gmail.com</li>
-        <li>(11) 98375-1970</li>
+        <li>contato@projetoadam.org.br</li>
+        <li>(11) 99999-0000</li>
         <li>São Paulo, SP</li>
         <li>São José de Caiana, PB</li>
        </ul>
       </div>
      </div>
      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-      <p class="text-gray-500 text-sm">© 2026 Projeto ADAM. Todos os direitos reservados.</p>
+      <p class="text-gray-500 text-sm">© 2024 Projeto ADAM. Todos os direitos reservados.</p>
       <div class="flex space-x-6 mt-4 md:mt-0"><a href="#doacoes" class="btn-primary px-6 py-2 rounded-full font-semibold text-sm">Doe Agora</a>
       </div>
      </div>
@@ -1389,65 +1438,9 @@
     }
     
     // Contact form
-    function initContactForm() {
-      const contactForm = document.getElementById('contact-form');
-      if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          
-          const name = document.getElementById('contact-name').value.trim();
-          const email = document.getElementById('contact-email').value.trim();
-          const subject = document.getElementById('contact-subject').value;
-          const message = document.getElementById('contact-message').value.trim();
-          
-          if (!name || !email || !subject || !message) {
-            showToast('Por favor, preencha todos os campos obrigatórios.', 'error');
-            return;
-          }
-          
-          const submitBtn = document.getElementById('contact-submit-btn');
-          const submitBtnText = document.getElementById('contact-btn-text');
-          submitBtn.disabled = true;
-          submitBtnText.textContent = 'Enviando...';
-          
-          // Check data limit
-          if (window.dataSdk && contactData.length >= 999) {
-            showToast('Limite de mensagens atingido. Por favor, entre em contato por telefone.', 'error');
-            submitBtn.disabled = false;
-            submitBtnText.textContent = 'Enviar Mensagem';
-            return;
-          }
-          
-          // Save to Data SDK
-          if (window.dataSdk) {
-            const result = await window.dataSdk.create({
-              type: 'contact',
-              name: name,
-              email: email,
-              subject: subject,
-              message: message,
-              donation_amount: 0,
-              payment_method: '',
-              created_at: new Date().toISOString()
-            });
+  
             
-            if (result.isOk) {
-              showModal('Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.');
-              contactForm.reset();
-            } else {
-              showToast('Erro ao enviar mensagem. Tente novamente.', 'error');
-            }
-          } else {
-            // Fallback without SDK
-            showModal('Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.');
-            contactForm.reset();
-          }
-          
-          submitBtn.disabled = false;
-          submitBtnText.textContent = 'Enviar Mensagem';
-        });
-      }
-    }
+
     
     // Toast notification
     function showToast(message, type) {
@@ -1535,4 +1528,3 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
