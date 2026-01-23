@@ -911,7 +911,7 @@
            </svg>
           </div>
           <div>
-           <p class="font-semibold text-gray-900">E-mail</p><a href="mailto:heitorbrito671@gmail.com" class="text-purple-600 hover:underline">adam.atibaia@gmail.com</a>
+           <p class="font-semibold text-gray-900">E-mail</p><a href="mailto:adam.atibaia@gmail.com" class="text-purple-600 hover:underline">adam.atibaia@gmail.com</a>
           </div>
          </div>
          <div class="flex items-start space-x-4">
@@ -1040,8 +1040,8 @@
       <div>
        <h4 class="font-heading font-bold text-lg mb-4">Contato</h4>
        <ul class="space-y-2 text-gray-400 text-sm">
-        <li>contato@projetoadam.org.br</li>
-        <li>(11) 99999-0000</li>
+        <li>adam.atibaia@gmail.com</li>
+        <li>(11) 98375-1970</li>
         <li>São Paulo, SP</li>
         <li>São José de Caiana, PB</li>
        </ul>
@@ -1484,10 +1484,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  if (!window.emailjs) {
-    console.error("EmailJS não carregou");
-    return;
-  }
+  if (!window.emailjs) return;
 
   emailjs.init("PyBDtOAys9UNPa8d6");
 
@@ -1506,21 +1503,26 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    emailjs.send(
-      "service_ktlcjpv",
-      "template_9jv3kca",
-      { name, email, message }
+  emailjs.send(
+  "service_ktlcjpv",
+  "template_9jv3kca",
+  {
+    name: name,
+    reply_to: email, // ← ISSO é o máximo permitido
+    message: message
+  }
+
+
     ).then(() => {
       alert("Mensagem enviada!");
       form.reset();
-    }).catch((err) => {
-      console.error("Erro EmailJS:", err);
-      alert("Erro ao enviar. Veja console.");
+    }).catch(err => {
+      console.error(err);
+      alert("Erro ao enviar");
     });
   });
 });
 </script>
-
 
 
  </body>
