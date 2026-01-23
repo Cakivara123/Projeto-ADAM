@@ -21,54 +21,6 @@
     alert('Chave PIX copiada!');
   }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs@4/dist/email.min.js"></script>
-<script>
-  emailjs.init("PyBDtOAys9UNPa8d6");
-</script>
-<script>
-function initContactForm() {
-  const contactForm = document.getElementById('contact-form');
-  if (!contactForm) return;
-
-  contactForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const submitBtn = document.getElementById('contact-submit-btn');
-    const submitBtnText = document.getElementById('contact-btn-text');
-
-    submitBtn.disabled = true;
-    submitBtnText.textContent = 'Enviando...';
-
-    const params = {
-      name: document.getElementById('contact-name').value,
-      email: document.getElementById('contact-email').value,
-      subject: document.getElementById('contact-subject').value,
-      message: document.getElementById('contact-message').value
-    };
-
-    emailjs.send(
-      'service_ktlcjpv',
-      'template_9jv3kca',
-      params
-    )
-    .then(() => {
-      showModal('Sua mensagem foi enviada com sucesso!');
-      contactForm.reset();
-    })
-    .catch((error) => {
-      console.error('EmailJS erro:', error);
-      showToast('Erro ao enviar a mensagem. Tente novamente.', 'error');
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtnText.textContent = 'Enviar Mensagem';
-    });
-  });
-}
-
-// ⚠️ ESSENCIAL
-initContactForm();
-</script>
 
   <style>
 /* Apenas em celular */
@@ -80,7 +32,6 @@ initContactForm();
   }
 }
 </style>
-
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
@@ -1436,10 +1387,8 @@ initContactForm();
         });
       }
     }
-    
-    // Contact form
   
-            
+
 
     
     // Toast notification
@@ -1523,8 +1472,68 @@ initContactForm();
       });
     });
     
+    
     // Initialize app
     initializeApp();
+    
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+ <script src="https://cdn.jsdelivr.net/npm/emailjs@4/dist/email.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Inicializa o EmailJS (apenas uma vez)
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init("PyBDtOAys9UNPa8d6");
+  } else {
+    console.error('EmailJS não carregado');
+    return;
+  }
+
+  // Inicializa formulário de contato
+  var contactForm = document.getElementById('contact-form');
+  if (!contactForm) return;
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var submitBtn = document.getElementById('contact-submit-btn');
+    var submitBtnText = document.getElementById('contact-btn-text');
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitBtnText) submitBtnText.textContent = 'Enviando...';
+
+    var nameEl = document.getElementById('contact-name');
+    var emailEl = document.getElementById('contact-email');
+    var subjectEl = document.getElementById('contact-subject');
+    var messageEl = document.getElementById('contact-message');
+
+    var params = {
+      name: nameEl ? nameEl.value.trim() : '',
+      email: emailEl ? emailEl.value.trim() : '',
+      subject: subjectEl ? subjectEl.value : '',
+      message: messageEl ? messageEl.value.trim() : ''
+    };
+
+    // envie
+    emailjs.send('service_ktlcjpv', 'template_9jv3kca', params)
+      .then(function (resp) {
+        if (typeof showModal === 'function') showModal('Sua mensagem foi enviada com sucesso!');
+        contactForm.reset();
+      })
+      .catch(function (error) {
+        console.error('EmailJS erro:', error);
+        if (typeof showToast === 'function') showToast('Erro ao enviar a mensagem. Tente novamente.', 'error');
+      })
+      .finally(function () {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitBtnText) submitBtnText.textContent = 'Enviar Mensagem';
+      });
+  });
+
+});
+</script>
+
+ </body>
 </html>
