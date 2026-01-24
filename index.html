@@ -24,20 +24,49 @@
 </script>
 
   <style>
-/* Apenas em celular */
+/* Apenas no mobile */
+/* Apenas Mobile */
 @media (max-width: 768px) {
+  /* Nav principal acompanha scroll */
   #main-nav {
-    position: sticky; /* faz acompanhar o scroll */
-    top: 0;           /* fixa no topo */
-    z-index: 50;      /* acima do conteúdo */
+    position: sticky; /* antes era fixed */
+    top: 0;
+    z-index: 50;
   }
 
-  #app-wrapper {
-    padding-top: 0;   /* opcional: se houver sobreposição */
+  /* Mobile menu acompanha scroll e abre até o fim */
+  #mobile-menu {
+    position: relative; /* acompanha o fluxo */
+    top: 0;
+    left: 0;
+    width: 100%; /* ocupa toda largura */
+    height: auto; /* altura do conteúdo */
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: none; /* inicialmente fechado */
+    z-index: 40;
+  }
+
+  #mobile-menu.active {
+    display: block; /* quando abrir */
+  }
+
+  #mobile-menu .space-y-4 {
+    max-height: calc(100vh - 4rem); /* altura total da tela menos a nav */
+    overflow-y: auto; /* scroll interno se necessário */
   }
 }
-</style>
 
+
+</style>
+<script>
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+  });
+</script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
       
@@ -279,11 +308,24 @@
        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
        </svg></button>
      </div>
-    </div><!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu fixed top-16 left-0 w-64 h-full bg-white shadow-lg md:hidden">
-     <div class="p-6 space-y-4"><a href="#home" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Início</a> <a href="#sobre" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Sobre</a> <a href="#programas" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Programas</a> <a href="#locais" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Locais</a> <a href="#galeria" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Galeria</a> <a href="#patrocinio" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Patrocínio</a> <a href="#doacoes" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Doações</a> <a href="#contato" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Contato</a>
-      <div class="pt-4"><a href="#doacoes" class="btn-primary block text-center px-6 py-2 rounded-full font-semibold">Doe Agora</a>
-      </div>
+   <!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu md:hidden">
+  <div class="p-6 space-y-4">
+    <a href="#home" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Início</a>
+    <a href="#sobre" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Sobre</a>
+    <a href="#programas" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Programas</a>
+    <a href="#locais" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Locais</a>
+    <a href="#galeria" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Galeria</a>
+    <a href="#patrocinio" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Patrocínio</a>
+    <a href="#doacoes" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Doações</a>
+    <a href="#contato" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Contato</a>
+
+    <div class="pt-4">
+      <a href="#doacoes" class="btn-primary block text-center px-6 py-2 rounded-full font-semibold">Doe Agora</a>
+    </div>
+  </div>
+</div>
+
      </div>
     </div>
    </nav><!-- Hero Section -->
