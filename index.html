@@ -25,11 +25,15 @@
 
   <style>
 /* Apenas em celular */
-@media (max-width: 640px) {
-  body {
-    transform: scale(0.75); /* diminui ~4x o espaçamento/tamanho */
-    transform-origin: top left;
-    width: 133.33%; /* corrige a largura após o scale */
+@media (max-width: 768px) {
+  #main-nav {
+    position: sticky; /* faz acompanhar o scroll */
+    top: 0;           /* fixa no topo */
+    z-index: 50;      /* acima do conteúdo */
+  }
+
+  #app-wrapper {
+    padding-top: 0;   /* opcional: se houver sobreposição */
   }
 }
 </style>
@@ -2018,8 +2022,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
  </body>
 </html>
-
-
-
 
 
