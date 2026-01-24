@@ -1197,7 +1197,7 @@
         </div>
         <div><label for="contact-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail *</label> <input type="email" id="contact-email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="seu@email.com">
         </div>
-        <div><label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-1">Assunto *</label> <select id="contact-subject" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent"> <option value="">Selecione um assunto</option> <option value="voluntariado">Quero ser voluntário</option> <option value="inscricao">Inscrição de atleta</option> <option value="parceria">Proposta de parceria</option> <option value="doacao">Dúvidas sobre doação</option> <option value="outro">Outro assunto</option> </select>
+        <div><label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-1">Assunto *</label> <select id="contact-subject" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent"> <option value="">Selecione um assunto</option> <option value="Quero participar">Quero participar</option> <option value="Comprar camiseta">Comprar camiseta</option> <option value="Proposta de patrocinio">Proposta de patrocinio</option> <option value="Dúvidas sobre doação">Dúvidas sobre doação</option> <option value="outro">Outro assunto</option> </select>
         </div>
         <div><label for="contact-message" class="block text-sm font-medium text-gray-700 mb-1">Mensagem *</label> <textarea id="contact-message" required rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none" placeholder="Escreva sua mensagem..."></textarea>
         </div><button type="submit" id="contact-submit-btn" class="btn-primary w-full py-4 rounded-full font-bold text-lg flex items-center justify-center">
@@ -1684,7 +1684,7 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 
-<!-- Esta é a versão correta da biblioteca EmailJS -->
+<!-- Biblioteca EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
 
 <script>
@@ -1701,29 +1701,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const name = document.getElementById("contact-name").value.trim();
     const email = document.getElementById("contact-email").value.trim();
+    const subject = document.getElementById("contact-subject").value.trim();
     const message = document.getElementById("contact-message").value.trim();
 
-    if (!name || !email || !message) {
-      alert("Preencha nome, e-mail e mensagem.");
+    if (!name || !email || !subject || !message) {
+      alert("Preencha nome, e-mail, assunto e mensagem.");
       return;
     }
 
-  emailjs.send(
-  "service_ktlcjpv",
-  "template_9jv3kca",
-  {
-    name: name,
-    reply_to: email, // ← ISSO é o máximo permitido
-    message: message
-  }
-
-
+    // Envia para EmailJS
+    emailjs.send(
+      "service_ktlcjpv",
+      "template_9jv3kca",
+      {
+        name: name,
+        reply_to: email, // quem enviou
+        subject: subject, // assunto enviado
+        message: message
+      }
     ).then(() => {
       alert("Mensagem enviada!");
       form.reset();
     }).catch(err => {
-      console.error(err);
-      alert("Erro ao enviar");
+      console.error("Erro EmailJS:", err);
+      alert("Erro ao enviar a mensagem.");
     });
   });
 });
