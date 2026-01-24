@@ -1001,6 +1001,291 @@
       </article>
 
     </div>
+   <!-- Apoiadores: carrossel infinito, drag, arrows, paleta branco/roxo -->
+<section id="apoiadores" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+    <h2 class="font-heading text-3xl font-bold text-purple-700 text-center mb-8">Apoiadores</h2>
+
+    <div class="relative">
+      <!-- Left arrow -->
+      <button id="apoPrev" aria-label="Voltar" class="apo-arrow left-2" type="button">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M15 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+
+      <!-- Viewport -->
+      <div id="apoViewport" class="apo-viewport rounded-xl overflow-hidden">
+        <div id="apoTrack" class="apo-track flex items-center gap-6">
+          <!-- Logos iniciais -->
+          <a href="https://www.instagram.com/oatibaienseoficial/" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo1.png" alt="Apoiador 1" class="apo-img">
+  </div>
+</a>
+
+           <a href="https://www.facebook.com/baseferroatibaia/?locale=pt_BR" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo2.png" alt="Apoiador 2" class="apo-img">
+  </div>
+</a>
+
+            <a href="https://www.georgiasportschiropractic.com/" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo3.png" alt="Apoiador 3" class="apo-img">
+  </div>
+</a>
+
+        <a href="https://www.facebook.com/smartpixoficial/?locale=pt_BR" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo4.png" alt="Apoiador 4" class="apo-img">
+  </div>
+</a>
+
+          <a href="https://www.facebook.com/edubikeatibaia/?locale=pt_BR" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo5.png" alt="Apoiador 5" class="apo-img">
+  </div>
+</a>
+
+         <a href="https://www.youtube.com/c/PenseLaranja" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo6.png" alt="Apoiador 6" class="apo-img">
+  </div>
+</a>
+
+            <a href="https://www.facebook.com/p/Borracharia-do-S%C3%A9rgio-Jardim-Imperial-100063474973804/" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo7.png" alt="Apoiador 7" class="apo-img">
+  </div>
+</a>
+
+            <a href="https://www.youtube.com/@IgrejaIECA" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo8.png" alt="Apoiador 8" class="apo-img">
+  </div>
+</a>
+
+          <a href="https://www.minhatribo.com.br/" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo9.png" alt="Apoiador 9" class="apo-img">
+  </div>
+</a>
+
+          <a href="https://www.instagram.com/h.v.paisagismo/" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo10.png" alt="Apoiador 10" class="apo-img">
+  </div>
+</a>
+
+      <a href="https://www.facebook.com/IECCerejeiras/" target="_blank">
+  <div class="apo-item flex items-center justify-center">
+    <img src="logo11.png" alt="Apoiador 11" class="apo-img">
+  </div>
+</a>
+
+        </div>
+      </div>
+
+      <!-- Right arrow -->
+      <button id="apoNext" aria-label="Avançar" class="apo-arrow right-2" type="button">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+:root {
+  --purple: #6A0DAD;
+  --purple-100: #F5E6FF;
+  --white: #fff;
+}
+
+/* Layout do carrossel */
+.apo-viewport { width: 100%; overflow: hidden; }
+.apo-track { display: flex; gap: 1.25rem; }
+.apo-item {
+  flex: 0 0 auto;
+  width: 160px; height: 96px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--white); border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(106,13,173,0.06);
+  padding: 0.5rem;
+}
+.apo-img { max-height: 64px; max-width: 100%; object-fit: contain; }
+
+/* Arrows */
+.apo-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid rgba(106,13,173,0.08);
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.apo-arrow svg { stroke: var(--purple); }
+.apo-arrow:hover { transform: translateY(-50%) scale(1.06); background: var(--purple-100); }
+
+.apo-arrow.left-2 { left: 0.5rem; }
+.apo-arrow.right-2 { right: 0.5rem; }
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .apo-item { width: 120px; height: 70px; }
+  .apo-img { max-height: 52px; }
+  .apo-arrow { width: 40px; height: 40px; }
+}
+</style>
+
+<script>
+
+(function(){
+  const viewport = document.getElementById('apoViewport');
+  const track = document.getElementById('apoTrack');
+  const nextBtn = document.getElementById('apoNext');
+  const prevBtn = document.getElementById('apoPrev');
+
+  if (!viewport || !track) return;
+
+  let autoSpeed = 0.04;
+  let running = true;
+  let lastTime = null;
+  let pos = 0;
+  let originalWidth = 0;
+  let pointerDown = false;
+  let startX = 0;
+  let startPos = 0;
+
+  function imagesLoaded(container) {
+    const imgs = container.querySelectorAll('img');
+    const promises = Array.from(imgs).map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(res => img.addEventListener('load', res, {once:true}));
+    });
+    return Promise.all(promises);
+  }
+
+  function setup() {
+    const children = Array.from(track.children);
+    const originalCount = children.length;
+
+    originalWidth = children.reduce((sum, el) => sum + el.getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap || 0), 0);
+    const gap = parseFloat(getComputedStyle(track).gap || 0);
+    if (!isNaN(gap)) originalWidth -= gap;
+
+    for (let i=0;i<originalCount;i++) {
+      const clone = children[i].cloneNode(true);
+      track.appendChild(clone);
+    }
+
+    viewport.scrollLeft = 0;
+    pos = 0;
+    lastTime = null;
+    requestAnimationFrame(tick);
+  }
+
+  function tick(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const dt = timestamp - lastTime;
+    lastTime = timestamp;
+
+    if (running && !pointerDown) {
+      pos += autoSpeed * dt;
+      if (originalWidth > 0 && pos >= originalWidth) pos -= originalWidth;
+      viewport.scrollLeft = pos;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function onPointerDown(e) {
+    pointerDown = true;
+    running = false;
+    startX = (e.touches ? e.touches[0].clientX : e.clientX) || 0;
+    startPos = pos;
+  }
+
+  function onPointerMove(e) {
+    if (!pointerDown) return;
+    const clientX = (e.touches ? e.touches[0].clientX : e.clientX) || 0;
+    const dx = clientX - startX;
+    pos = startPos - dx;
+    if (originalWidth > 0) pos = ((pos % originalWidth) + originalWidth) % originalWidth;
+    viewport.scrollLeft = pos;
+  }
+
+  function onPointerUp(e) {
+    pointerDown = false;
+    running = true;
+    lastTime = null;
+  }
+
+  function jump(delta) {
+    const jumpSize = Math.max(120, viewport.clientWidth / 2);
+    pos = (pos + delta * jumpSize);
+    if (originalWidth > 0) pos = ((pos % originalWidth) + originalWidth) % originalWidth;
+    viewport.scrollLeft = pos;
+  }
+
+  viewport.addEventListener('mouseenter', ()=>{ running=false; });
+  viewport.addEventListener('mouseleave', ()=>{ if(!pointerDown){ running=true; lastTime=null; }});
+
+  const supportsPointer = window.PointerEvent;
+  if (supportsPointer) {
+    viewport.addEventListener('pointerdown', e=>{ viewport.setPointerCapture && viewport.setPointerCapture(e.pointerId); onPointerDown(e); });
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+  } else {
+    viewport.addEventListener('touchstart', onPointerDown, {passive:false});
+    window.addEventListener('touchmove', onPointerMove, {passive:false});
+    window.addEventListener('touchend', onPointerUp);
+    viewport.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+  }
+
+  nextBtn.addEventListener('click', ()=> jump(1));
+  prevBtn.addEventListener('click', ()=> jump(-1));
+
+  // Clique nos links mesmo com carrossel rolando
+  track.querySelectorAll('a').forEach(link => {
+    let pointerDownX = 0;
+    let moved = false;
+
+    link.addEventListener('pointerdown', e => {
+      pointerDownX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      moved = false;
+      e.stopPropagation();
+    });
+
+    link.addEventListener('pointermove', e => {
+      const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      if (Math.abs(currentX - pointerDownX) > 5) moved = true;
+    });
+
+    link.addEventListener('click', e => {
+      if (moved) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  imagesLoaded(track).then(()=> setup());
+})();
+
+
+
+
+</script>
+
 
     <!-- Nota/Observações -->
     <p class="text-xs text-gray-500 mt-6">*Todos os valores e benefícios podem ser ajustados conforme negociação. Entre em contato via <a href="#contato" class="text-purple-600 underline">contato</a> para mais informações.</p>
@@ -1733,5 +2018,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
  </body>
 </html>
+
+
+
 
 
