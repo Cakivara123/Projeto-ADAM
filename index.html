@@ -27,7 +27,7 @@
 /* Apenas em celular */
 @media (max-width: 640px) {
   body {
-    transform: scale(0.75); /* diminui ~4x o espaçamento/tamanho */
+    transform: scale(1.00); /* diminui ~4x o espaçamento/tamanho */
     transform-origin: top left;
     width: 133.33%; /* corrige a largura após o scale */
   }
@@ -671,83 +671,93 @@
   </div>
 </section>
 
-  <section id="locais" class="py-20 bg-white">
+  <section id="locais" class="py-8 md:py-16 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- grid: 1 coluna no mobile, 2 colunas a partir de md -->
-    <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
+    <!-- Grid responsivo: 1 coluna mobile, 2 colunas sm+ -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-      
       <!-- Card 1 -->
-      <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover">
-        <div class="bg-gradient-to-br from-purple-500 to-purple-700 h-24 flex items-center justify-center relative">
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover flex flex-col">
+        <!-- Header -->
+        <div class="bg-gradient-to-br from-purple-500 to-purple-700 h-20 md:h-32 flex items-center justify-center relative">
           <div class="text-center text-white">
-            <span class="text-5xl mb-2 block"></span>
-                      <h3 class="text-2xl md:text-3xl font-extrabold">
- Atibaia/SP
-</h3>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold">Atibaia/SP</h3>
           </div>
         </div>
 
-        <div class="p-4">
+        <!-- Conteúdo -->
+        <div class="p-3 sm:p-4 md:p-6 flex-1 flex flex-col">
           <!-- iframe responsivo -->
-          <div class="mb-4">
+          <div class="mb-4 w-full flex-1">
             <iframe
-              class="w-full h-64 border-0"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20754.068358301032!2d-46.595092402415816!3d-23.13968301786152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cec15d6005bb93%3A0xf4d689898c453777!2sR.%20Casemiro%20de%20Abreu%2C%20391%20-%20Jardim%20das%20Cerejeiras%2C%20Atibaia%20-%20SP%2C%2012951-170!5e0!3m2!1spt-BR!2sbr!4v1769178690946!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen=""
+              class="w-full h-48 sm:h-64 md:h-72 border-0 rounded-xl"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20754.068358301032!2d-46.595092402415816!3d-23.13968301786152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cec15d6005bb93%3A0xf4d689898c453777!2sR.+Casemiro+de+Abreu%2C+391+-+Jardim+das+Cerejeiras%2C+Atibaia+-+SP%2C+12951-170!5e0!3m2!1spt-BR!2sbr!4v1769178690946!5m2!1spt-BR!2sbr"
+              allowfullscreen
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
 
-          <a class="inline-flex items-center text-sm text-green-600 mb-2" href="https://www.google.com/maps?ll=-23.130959,-46.584905&z=13&t=m&hl=pt-BR&gl=BR&mapclient=embed&q=R.+Casemiro+de+Abreu,+391+-+Jardim+das+Cerejeiras+Atibaia+-+SP+12951-170">
+          <!-- Link "Como Chegar" -->
+          <a class="inline-flex items-center text-sm sm:text-base text-green-600 mb-2" href="https://www.google.com/maps?ll=-23.130959,-46.584905&z=13&t=m&hl=pt-BR&gl=BR&mapclient=embed&q=R.+Casemiro+de+Abreu,+391+-+Jardim+das+Cerejeiras+Atibaia+-+SP+12951-170">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21.71 11.29l-9-9a.996.996 0 00-1.41 0l-9 9a.996.996 0 000 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 000-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/>
             </svg>
             Como Chegar
           </a>
 
-          <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">São José de Caiana - PB</h3>
-          <p class="text-gray-600">R. Casemiro de Abreu, 391 - Jardim das Cerejeiras, Atibaia - SP<br>CEP: 12951-170</p>
+          <!-- Endereço -->
+          <h3 class="font-heading text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1">São José de Caiana - PB</h3>
+          <p class="text-gray-600 text-sm sm:text-base">
+            R. Casemiro de Abreu, 391 - Jardim das Cerejeiras, Atibaia - SP<br>
+            CEP: 12951-170
+          </p>
         </div>
       </div>
 
       <!-- Card 2 -->
-      <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover">
-        <div class="bg-gradient-to-br from-purple-500 to-purple-700 h-24 flex items-center justify-center relative">
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover flex flex-col">
+        <!-- Header -->
+        <div class="bg-gradient-to-br from-purple-500 to-purple-700 h-20 md:h-32 flex items-center justify-center relative">
           <div class="text-center text-white">
-            <span class="text-10xl mb-2 block"></span>
-            <h3 class="text-2xl md:text-3xl font-extrabold">
-  São José de Caiana/PB
-</h3>
-
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold">São José de Caiana/PB</h3>
           </div>
         </div>
 
-        <div class="p-4">
-          <div class="mb-4">
+        <!-- Conteúdo -->
+        <div class="p-3 sm:p-4 md:p-6 flex-1 flex flex-col">
+          <!-- iframe responsivo -->
+          <div class="mb-4 w-full flex-1">
             <iframe
-              class="w-full h-64 border-0"
+              class="w-full h-48 sm:h-64 md:h-72 border-0 rounded-xl"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d832.0498252992448!2d-38.30572457537487!3d-7.250140301714429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a69fef1dcdb12b%3A0x81439d0039b0e9ac!2sCampo%20de%20Futebol!5e0!3m2!1spt-BR!2sbr!4v1769107961750!5m2!1spt-BR!2sbr"
-              allowfullscreen=""
+              allowfullscreen
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
 
-          <a class="inline-flex items-center text-sm text-green-600 mb-2" href="https://www.google.com/maps?ll=-7.249807,-38.305749&z=18&t=m&hl=pt-BR&gl=BR&mapclient=embed&cid=9314461078625773996">
+          <!-- Link "Como Chegar" -->
+          <a class="inline-flex items-center text-sm sm:text-base text-green-600 mb-2" href="https://www.google.com/maps?ll=-7.249807,-38.305749&z=18&t=m&hl=pt-BR&gl=BR&mapclient=embed&cid=9314461078625773996">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21.71 11.29l-9-9a.996.996 0 00-1.41 0l-9 9a.996.996 0 000 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 000-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/>
             </svg>
             Como Chegar
           </a>
 
-          <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">São José de Caiana - PB</h3>
-          <p class="text-gray-600">Campo de Futebol<br>CEP: 58784-000</p>
+          <!-- Endereço -->
+          <h3 class="font-heading text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1">São José de Caiana - PB</h3>
+          <p class="text-gray-600 text-sm sm:text-base">
+            Campo de Futebol<br>
+            CEP: 58784-000
+          </p>
         </div>
       </div>
 
     </div> <!-- fim grid -->
   </div>
 </section>
+
 
  <section id="galeria" class="py-20 bg-purple-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
