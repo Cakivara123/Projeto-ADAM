@@ -688,18 +688,6 @@
             </thead>
             <tbody>
               <tr>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">🏐 Vôlei Infantil</td>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">Terça e Quinta</td>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">14:00 - 16:00</td>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">Quadra Principal</td>
-              </tr>
-              <tr>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">🏐 Vôlei Juvenil</td>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">Segunda e Quarta</td>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">16:00 - 18:00</td>
-                <td class="px-2 sm:px-4 py-1 sm:py-2">Quadra Principal</td>
-              </tr>
-              <tr>
                 <td class="px-2 sm:px-4 py-1 sm:py-2">⚽ Futebol Infantil</td>
                 <td class="px-2 sm:px-4 py-1 sm:py-2">Terça e Quinta</td>
                 <td class="px-2 sm:px-4 py-1 sm:py-2">09:00 - 11:00</td>
@@ -857,7 +845,7 @@
 <section id="patrocinio" class="py-10 sm:py-16 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10">
 
-    <!-- TÍTULO -->
+    
     <div class="text-center mb-6 sm:mb-10">
       <h2 class="font-heading text-2xl sm:text-4xl font-bold text-gray-900">
         Planos de Patrocínio
@@ -866,7 +854,7 @@
         Apoie o Projeto ADAM e coloque sua marca ao lado do desenvolvimento de crianças e jovens.
       </p>
 
-      <!-- CAMISA -->
+      
       <div class="mt-6 flex flex-col items-center sm:flex-row sm:justify-center gap-4 sm:gap-6">
         <div class="w-40 sm:w-56 lg:w-72 bg-gray-100 rounded-xl overflow-hidden shadow-inner">
           <img src="CamisaAdam.png" alt="Camisa Projeto ADAM" class="w-full h-auto object-contain">
@@ -1304,11 +1292,13 @@
 
   if (!viewport || !track) return;
 
-  let autoSpeed = 0.04;
+  let autoSpeed = 0.04; 
   let running = true;
   let lastTime = null;
   let pos = 0;
   let originalWidth = 0;
+
+  
   let pointerDown = false;
   let startX = 0;
   let startPos = 0;
@@ -1326,10 +1316,10 @@
     const children = Array.from(track.children);
     const originalCount = children.length;
 
-    originalWidth = children.reduce((sum, el) => sum + el.getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap || 0), 0);
     const gap = parseFloat(getComputedStyle(track).gap || 0);
-    if (!isNaN(gap)) originalWidth -= gap;
+    originalWidth = children.reduce((sum, el) => sum + el.getBoundingClientRect().width + gap, 0) - gap;
 
+    
     for (let i=0;i<originalCount;i++) {
       const clone = children[i].cloneNode(true);
       track.appendChild(clone);
@@ -1346,36 +1336,37 @@
     const dt = timestamp - lastTime;
     lastTime = timestamp;
 
-    if (running && !pointerDown) {
+    if (running && !pointerDown) { 
       pos += autoSpeed * dt;
-      if (originalWidth > 0 && pos >= originalWidth) pos -= originalWidth;
+      if (pos >= originalWidth) pos -= originalWidth;
       viewport.scrollLeft = pos;
     }
+
     requestAnimationFrame(tick);
   }
 
+ 
   function onPointerDown(e) {
     pointerDown = true;
-    running = false;
-    startX = (e.touches ? e.touches[0].clientX : e.clientX) || 0;
+    running = false; 
+    startX = e.touches ? e.touches[0].clientX : e.clientX;
     startPos = pos;
   }
-
   function onPointerMove(e) {
     if (!pointerDown) return;
-    const clientX = (e.touches ? e.touches[0].clientX : e.clientX) || 0;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const dx = clientX - startX;
     pos = startPos - dx;
     if (originalWidth > 0) pos = ((pos % originalWidth) + originalWidth) % originalWidth;
     viewport.scrollLeft = pos;
   }
-
-  function onPointerUp(e) {
+  function onPointerUp() {
     pointerDown = false;
-    running = true;
+    running = true; 
     lastTime = null;
   }
 
+  
   function jump(delta) {
     const jumpSize = Math.max(120, viewport.clientWidth / 2);
     pos = (pos + delta * jumpSize);
@@ -1383,25 +1374,13 @@
     viewport.scrollLeft = pos;
   }
 
-  viewport.addEventListener('mouseenter', ()=>{ running=false; });
-  viewport.addEventListener('mouseleave', ()=>{ if(!pointerDown){ running=true; lastTime=null; }});
-
-  const supportsPointer = window.PointerEvent;
-  if (supportsPointer) {
-    viewport.addEventListener('pointerdown', e=>{ viewport.setPointerCapture && viewport.setPointerCapture(e.pointerId); onPointerDown(e); });
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerup', onPointerUp);
-  } else {
-    viewport.addEventListener('touchstart', onPointerDown, {passive:false});
-    window.addEventListener('touchmove', onPointerMove, {passive:false});
-    window.addEventListener('touchend', onPointerUp);
-    viewport.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerUp);
-  }
-
   nextBtn.addEventListener('click', ()=> jump(1));
   prevBtn.addEventListener('click', ()=> jump(-1));
+
+  
+  viewport.addEventListener('pointerdown', e=> { viewport.setPointerCapture && viewport.setPointerCapture(e.pointerId); onPointerDown(e); });
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
 
   
   track.querySelectorAll('a').forEach(link => {
@@ -1420,14 +1399,13 @@
     });
 
     link.addEventListener('click', e => {
-      if (moved) {
-        e.preventDefault();
-      }
+      if (moved) e.preventDefault();
     });
   });
 
-  imagesLoaded(track).then(()=> setup());
+  imagesLoaded(track).then(setup);
 })();
+
 
 
 
