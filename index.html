@@ -1404,6 +1404,40 @@
   });
 
   imagesLoaded(track).then(setup);
+  
+track.querySelectorAll('a').forEach(link => {
+  let pointerDownX = 0;
+  let moved = false;
+  let lastTap = 0;
+
+  link.addEventListener('pointerdown', e => {
+    pointerDownX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    moved = false;
+    e.stopPropagation();
+  });
+
+  link.addEventListener('pointermove', e => {
+    const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    if (Math.abs(currentX - pointerDownX) > 5) moved = true;
+  });
+
+  link.addEventListener('click', e => {
+    if (moved) {
+      e.preventDefault(); 
+      return;
+    }
+
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      
+      return;
+    } else {
+      
+      e.preventDefault();
+    }
+    lastTap = now;
+  });
+});
 })();
 
 
