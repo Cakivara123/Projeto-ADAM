@@ -1313,8 +1313,8 @@
 }
 </style>
 
-<script>
 
+<script>
 (function(){
   const viewport = document.getElementById('apoViewport');
   const track = document.getElementById('apoTrack');
@@ -1323,13 +1323,12 @@
 
   if (!viewport || !track) return;
 
-  let autoSpeed = 0.04; 
+  let autoSpeed = 0.04;
   let running = true;
   let lastTime = null;
   let pos = 0;
   let originalWidth = 0;
 
-  
   let pointerDown = false;
   let startX = 0;
   let startPos = 0;
@@ -1338,7 +1337,7 @@
     const imgs = container.querySelectorAll('img');
     const promises = Array.from(imgs).map(img => {
       if (img.complete) return Promise.resolve();
-      return new Promise(res => img.addEventListener('load', res, {once:true}));
+      return new Promise(res => img.addEventListener('load', res, { once: true }));
     });
     return Promise.all(promises);
   }
@@ -1346,12 +1345,10 @@
   function setup() {
     const children = Array.from(track.children);
     const originalCount = children.length;
-
     const gap = parseFloat(getComputedStyle(track).gap || 0);
     originalWidth = children.reduce((sum, el) => sum + el.getBoundingClientRect().width + gap, 0) - gap;
 
-    
-    for (let i=0;i<originalCount;i++) {
+    for (let i = 0; i < originalCount; i++) {
       const clone = children[i].cloneNode(true);
       track.appendChild(clone);
     }
@@ -1367,7 +1364,7 @@
     const dt = timestamp - lastTime;
     lastTime = timestamp;
 
-    if (running && !pointerDown) { 
+    if (running && !pointerDown) {
       pos += autoSpeed * dt;
       if (pos >= originalWidth) pos -= originalWidth;
       viewport.scrollLeft = pos;
@@ -1376,16 +1373,15 @@
     requestAnimationFrame(tick);
   }
 
- 
   function onPointerDown(e) {
     pointerDown = true;
-    running = false; 
-    startX = e.touches ? e.touches[0].clientX : e.clientX;
+    running = false;
+    startX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
     startPos = pos;
   }
   function onPointerMove(e) {
     if (!pointerDown) return;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
     const dx = clientX - startX;
     pos = startPos - dx;
     if (originalWidth > 0) pos = ((pos % originalWidth) + originalWidth) % originalWidth;
@@ -1393,11 +1389,10 @@
   }
   function onPointerUp() {
     pointerDown = false;
-    running = true; 
+    running = true;
     lastTime = null;
   }
 
-  
   function jump(delta) {
     const jumpSize = Math.max(120, viewport.clientWidth / 2);
     pos = (pos + delta * jumpSize);
@@ -1405,77 +1400,45 @@
     viewport.scrollLeft = pos;
   }
 
-  nextBtn.addEventListener('click', ()=> jump(1));
-  prevBtn.addEventListener('click', ()=> jump(-1));
+  nextBtn.addEventListener('click', () => jump(1));
+  prevBtn.addEventListener('click', () => jump(-1));
 
-  
-  viewport.addEventListener('pointerdown', e=> { viewport.setPointerCapture && viewport.setPointerCapture(e.pointerId); onPointerDown(e); });
+  viewport.addEventListener('pointerdown', e => {
+    if (viewport.setPointerCapture) viewport.setPointerCapture(e.pointerId);
+    onPointerDown(e);
+  });
   window.addEventListener('pointermove', onPointerMove);
   window.addEventListener('pointerup', onPointerUp);
 
-  
+  // --- Link handlers: apenas previne clique se teve movimentação (arraste) ---
   track.querySelectorAll('a').forEach(link => {
     let pointerDownX = 0;
     let moved = false;
 
     link.addEventListener('pointerdown', e => {
-      pointerDownX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      // NÃO chamar stopPropagation aqui — deixa o click acontecer normalmente quando não for arraste
+      pointerDownX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
       moved = false;
-      e.stopPropagation();
     });
 
     link.addEventListener('pointermove', e => {
-      const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      const currentX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
       if (Math.abs(currentX - pointerDownX) > 5) moved = true;
     });
 
     link.addEventListener('click', e => {
-      if (moved) e.preventDefault();
+      if (moved) {
+        // se o usuário arrastou o carrossel, evita que o link seja ativado
+        e.preventDefault();
+      }
+      // se não houve arraste, permite o click normalmente (navegação ou handler superior)
     });
   });
 
   imagesLoaded(track).then(setup);
-  
-track.querySelectorAll('a').forEach(link => {
-  let pointerDownX = 0;
-  let moved = false;
-  let lastTap = 0;
-
-  link.addEventListener('pointerdown', e => {
-    pointerDownX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-    moved = false;
-    e.stopPropagation();
-  });
-
-  link.addEventListener('pointermove', e => {
-    const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-    if (Math.abs(currentX - pointerDownX) > 5) moved = true;
-  });
-
-  link.addEventListener('click', e => {
-    if (moved) {
-      e.preventDefault(); 
-      return;
-    }
-
-    const now = Date.now();
-    if (now - lastTap < 300) {
-      
-      return;
-    } else {
-      
-      e.preventDefault();
-    }
-    lastTap = now;
-  });
-});
 })();
-
-
-
-
-
 </script>
+
 
 
     
