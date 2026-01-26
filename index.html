@@ -1382,40 +1382,45 @@
 
 
 <script>
-  (function() {
-    const carouselBlog = document.getElementById("blogCarousel");
-    const cardsBlog = document.querySelectorAll(".blog-card");
-    const nextBtnBlog = document.getElementById("nextBtnBlog");
-    const prevBtnBlog = document.getElementById("prevBtnBlog");
-    let indexBlog = 0;
+(function() {
+  const carouselBlog = document.getElementById("blogCarousel");
+  const cardsBlog = document.querySelectorAll(".blog-card");
+  const nextBtnBlog = document.getElementById("nextBtnBlog");
+  const prevBtnBlog = document.getElementById("prevBtnBlog");
+  let indexBlog = 0;
 
-    function updateCarouselBlog() {
-      carouselBlog.style.transform = `translateX(-${indexBlog * (100 / cardsBlog.length)}%)`;
+  function updateCarouselBlog() {
+    const cardWidth = cardsBlog[0].offsetWidth;
+    carouselBlog.style.transform = `translateX(-${indexBlog * cardWidth}px)`;
 
-      prevBtnBlog.disabled = indexBlog === 0;
-      nextBtnBlog.disabled = indexBlog === cardsBlog.length - 1;
+    prevBtnBlog.disabled = indexBlog === 0;
+    nextBtnBlog.disabled = indexBlog >= cardsBlog.length - 1;
 
-      prevBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog === 0);
-      nextBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog === cardsBlog.length - 1);
+    prevBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog === 0);
+    nextBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog >= cardsBlog.length - 1);
+  }
+
+  nextBtnBlog.addEventListener("click", () => {
+    if (indexBlog < cardsBlog.length - 1) {
+      indexBlog++;
+      updateCarouselBlog();
     }
+  });
 
-    nextBtnBlog.addEventListener("click", () => {
-      if (indexBlog < cardsBlog.length - 1) {
-        indexBlog++;
-        updateCarouselBlog();
-      }
-    });
+  prevBtnBlog.addEventListener("click", () => {
+    if (indexBlog > 0) {
+      indexBlog--;
+      updateCarouselBlog();
+    }
+  });
 
-    prevBtnBlog.addEventListener("click", () => {
-      if (indexBlog > 0) {
-        indexBlog--;
-        updateCarouselBlog();
-      }
-    });
+  
+  window.addEventListener("resize", updateCarouselBlog);
 
-    updateCarouselBlog();
-  })();
+  updateCarouselBlog();
+})();
 </script>
+
 
 
    </div>
