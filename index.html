@@ -1389,19 +1389,31 @@
   const prevBtnBlog = document.getElementById("prevBtnBlog");
   let indexBlog = 0;
 
+  function getCardsPerView() {
+    const width = window.innerWidth;
+    if (width >= 1024) return 3; // desktop: 3 cards visíveis
+    if (width >= 640) return 2;  // tablet: 2 cards visíveis
+    return 1;                     // celular: 1 card visível
+  }
+
   function updateCarouselBlog() {
-    const cardWidth = cardsBlog[0].offsetWidth;
+    const cardsPerView = getCardsPerView();
+    const cardWidth = cardsBlog[0].offsetWidth + parseInt(getComputedStyle(cardsBlog[0]).marginRight) * 2;
+    
+    // Calcula o deslocamento
     carouselBlog.style.transform = `translateX(-${indexBlog * cardWidth}px)`;
 
+    // Bloqueia os botões quando não houver próximo/anterior
     prevBtnBlog.disabled = indexBlog === 0;
-    nextBtnBlog.disabled = indexBlog >= cardsBlog.length - 1;
+    nextBtnBlog.disabled = indexBlog >= cardsBlog.length - cardsPerView;
 
     prevBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog === 0);
-    nextBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog >= cardsBlog.length - 1);
+    nextBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog >= cardsBlog.length - cardsPerView);
   }
 
   nextBtnBlog.addEventListener("click", () => {
-    if (indexBlog < cardsBlog.length - 1) {
+    const cardsPerView = getCardsPerView();
+    if (indexBlog < cardsBlog.length - cardsPerView) {
       indexBlog++;
       updateCarouselBlog();
     }
@@ -1414,7 +1426,7 @@
     }
   });
 
-  
+  // Atualiza ao redimensionar a tela
   window.addEventListener("resize", updateCarouselBlog);
 
   updateCarouselBlog();
