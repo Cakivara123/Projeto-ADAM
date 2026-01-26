@@ -367,7 +367,7 @@
   </span>
 </div>
 
-      <div class="hidden md:flex items-center space-x-8"><a href="#home" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Início</a> <a href="#sobre" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Sobre</a> <a href="#programas" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Programas</a> <a href="#locais" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Locais</a> <a href="#patrocinio" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Patrocínio</a> <a href="#doacoes" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Doações</a> <a href="#contato" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Contato</a>
+      <div class="hidden md:flex items-center space-x-8"><a href="#home" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Início</a> <a href="#sobre" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Sobre</a> <a href="#programas" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Programas</a> <a href="#locais" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Locais</a> <a href="#patrocinio" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Patrocínio</a>   <a href="#blog" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Blog</a><a href="#doacoes" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Doações</a> <a href="#contato" class="nav-link text-gray-700 hover:text-purple-700 font-medium">Contato</a>
       </div><!-- CTA Buttons -->
       <div class="hidden md:flex items-center space-x-4"><a href="#doacoes" class="btn-primary px-6 py-2 rounded-full font-semibold text-sm">Doe Agora</a>
       </div><!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden p-2">
@@ -381,7 +381,8 @@
     <a href="#sobre" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Sobre</a>
     <a href="#programas" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Programas</a>
     <a href="#locais" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Locais</a>
-    <a href="#patrocinio" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Patrocínio</a>
+    <a href="#patrocineo" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Patrocínio</a>
+     <a href="#blog" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Blog</a>
     <a href="#doacoes" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Doações</a>
     <a href="#contato" class="block py-2 text-gray-700 hover:text-purple-700 font-medium">Contato</a>
 
@@ -1400,10 +1401,10 @@
     const cardsPerView = getCardsPerView();
     const cardWidth = cardsBlog[0].offsetWidth + parseInt(getComputedStyle(cardsBlog[0]).marginRight) * 2;
     
-    // Calcula o deslocamento
+   
     carouselBlog.style.transform = `translateX(-${indexBlog * cardWidth}px)`;
 
-    // Bloqueia os botões quando não houver próximo/anterior
+   
     prevBtnBlog.disabled = indexBlog === 0;
     nextBtnBlog.disabled = indexBlog >= cardsBlog.length - cardsPerView;
 
@@ -1426,7 +1427,7 @@
     }
   });
 
-  // Atualiza ao redimensionar a tela
+  
   window.addEventListener("resize", updateCarouselBlog);
 
   updateCarouselBlog();
