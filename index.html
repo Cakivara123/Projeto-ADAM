@@ -1460,6 +1460,48 @@
   </div>
   </div>
   <script>
+
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        const target = document.querySelector(href);
+
+       
+        if (!target) return;
+
+        e.preventDefault();
+
+        const mobileMenu = document.getElementById('mobile-menu');
+        const isMobileMenuOpen =
+          mobileMenu && mobileMenu.classList.contains('active');
+
+        function scrollToTarget() {
+          
+          const headerOffset = document.querySelector('header')?.offsetHeight || 0;
+          const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+
+        if (isMobileMenuOpen) {
+          mobileMenu.classList.remove('active');
+          setTimeout(scrollToTarget, 260); 
+        } else {
+          scrollToTarget();
+        }
+      });
+    });
+  });
+</script>
+
+
+  <script>
     
     const defaultConfig = {
       hero_title: 'Projeto ADAM',
@@ -1854,7 +1896,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mobileMenu && mobileMenu.classList.contains('active');
 
       const scrollToTarget = () => {
-        // Usa scrollIntoView sem bloquear o hash
+        
         target.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
@@ -1863,27 +1905,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (isMobileMenuOpen) {
         mobileMenu.classList.remove('active');
-        setTimeout(scrollToTarget, 260); // espera animação fechar
+        setTimeout(scrollToTarget, 260); 
       } else {
-        // Atualiza o hash *sem* impedir o comportamento nativo
+       
         history.pushState(null, null, href);
 
-        scrollToTarget(); // roda suave
+        scrollToTarget(); 
       }
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      const target = document.querySelector(href);
+
+      if (!target) return;
+
+      e.preventDefault();
+
+      const mobileMenu = document.getElementById('mobile-menu');
+      const isMobileMenuOpen =
+        mobileMenu && mobileMenu.classList.contains('active');
+
+      const scrollToTarget = () => {
+        const headerOffset = document.querySelector('header')?.offsetHeight || 0;
+        const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      };
+
+      if (isMobileMenuOpen) {
+        mobileMenu.classList.remove('active');
+        setTimeout(scrollToTarget, 260);
+      } else {
+        scrollToTarget();
+      }
+    });
+  });
+});
+
+    applyConfig();
+initializeUI();
+
 </script>
 
 
     
     
   
-    applyConfig();
-initializeUI();
 
     
-  </script>
+
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c210afab7e5f63f',t:'MTc2OTEwNTc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 
 <!-- Biblioteca EmailJS -->
