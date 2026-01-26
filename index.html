@@ -1304,74 +1304,119 @@
 
 
     </div>
- <div id="lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
-  <span class="absolute top-6 right-6 text-white text-4xl cursor-pointer" onclick="closeLightbox()">×</span>
-
-  <img id="lightbox-img" class="max-w-[90%] max-h-[90%] rounded-xl">
-</div>
-<section id="blog" class="py-20 bg-white">
+ <section id="blog" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 class="text-4xl font-bold text-gray-900">Blog do Projeto ADAM</h2>
     <p class="mt-2 text-purple-600 font-semibold">Acompanhe as novidades!</p>
 
-   
-    <div class="mt-10 grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-      
-      <!-- Card 1 -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="blog1.webp" alt="Blog Post 1" class="w-full h-50 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-purple-700">Encerramento de 2025, 8 anos de ADAM</h3>
-          <p class="mt-2 text-gray-600 text-sm">
-No dia 20/12/2025 (sábado), a ADAM celebra o encerramento de mais um ano agradecendo a Deus por todas as conquistas, desafios superados e vidas impactadas. O evento também marca o aniversário de 8 anos da ADAM, com comemoração no campo da ADAM, às 8h, incluindo bolo, amistoso e um momento de união em família. 💜
-          </p>
-          <a href="https://www.instagram.com/p/DSYB3SigT7i/" class="mt-4 inline-block text-purple-600 font-semibold hover:underline">
-            Continuar lendo »
-          </a>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="blog2.webp" alt="Blog Post 2" class="w-full h-50 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-purple-700">Jogos da ADAM, Copa da Liga Base F7 2025</h3>
-          <p class="mt-2 text-gray-600 text-sm">
-     No sábado, 08/11/2025, a ADAM entra em campo pela Copa da Liga Base F7 2025, com dois jogos: o Sub-13 enfrenta o SPRAC às 12:20, e o Sub-17 joga contra o ECR Paraguai às 13:10
-          </p>
-          <a href="https://www.instagram.com/p/DQwRJ1IjqL3/?img_index=1" class="mt-4 inline-block text-purple-600 font-semibold hover:underline">
-            Continuar lendo »
-          </a>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="blog3.webp" alt="Blog Post 3" class="w-full h-50 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-purple-700">Primeiro Dia de Viagem, Inauguração do Novo Campo da ADAM</h3>
-          <p class="mt-2 text-gray-600 text-sm">
-           No primeiro dia da viagem, os voluntários participaram da inauguração do novo campo da ADAM na cidade. Houve momentos de jogo e treino, além de um tempo de Palavra e oração, expressando gratidão a Deus por tudo o que Ele tem feito no projeto e na vida das pessoas impactadas no sertão. Louvado seja o Senhor!
-          </p>
-          <a href="https://www.instagram.com/p/DMdF1eaORoU/?img_index=1" class="mt-4 inline-block text-purple-600 font-semibold hover:underline">
-            Continuar lendo »
-          </a>
-        </div>
-      </div>
-
-    </div>
-
     
-    <div class="mt-10 flex justify-center items-center space-x-4">
-      <button class="px-4 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700">
-        ← Anterior
-      </button>
-      <button class="px-4 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700">
-        Próxima →
-      </button>
+    <div class="relative overflow-hidden mt-10">
+      <div id="blogCarousel" class="flex transition-transform duration-300">
+        
+        <!-- Card 1 -->
+        <div class="blog-card shrink-0 w-full sm:w-1/2 lg:w-1/3 px-2">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <img src="blog1.webp" alt="Blog Post 1" class="w-full h-50 object-cover">
+            <div class="p-6 text-left">
+              <h3 class="text-xl font-bold text-purple-700">Encerramento de 2025, 8 anos de ADAM</h3>
+              <p class="mt-2 text-gray-600 text-sm">
+                No dia 20/12/2025 (sábado), a ADAM celebra o encerramento de mais um ano...
+              </p>
+              <a href="https://www.instagram.com/p/DSYB3SigT7i/" 
+                 class="mt-4 inline-block text-purple-600 font-semibold hover:underline text-sm">
+                Continuar lendo »
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="blog-card shrink-0 w-full sm:w-1/2 lg:w-1/3 px-2">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <img src="blog2.webp" alt="Blog Post 2" class="w-full h-50 object-cover">
+            <div class="p-6 text-left">
+              <h3 class="text-xl font-bold text-purple-700">Jogos da ADAM, Copa da Liga Base F7 2025</h3>
+              <p class="mt-2 text-gray-600 text-sm">
+                No sábado, 08/11/2025, a ADAM entra em campo...
+              </p>
+              <a href="https://www.instagram.com/p/DQwRJ1IjqL3/?img_index=1" 
+                 class="mt-4 inline-block text-purple-600 font-semibold hover:underline text-sm">
+                Continuar lendo »
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="blog-card shrink-0 w-full sm:w-1/2 lg:w-1/3 px-2">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <img src="blog3.webp" alt="Blog Post 3" class="w-full h-50 object-cover">
+            <div class="p-6 text-left">
+              <h3 class="text-xl font-bold text-purple-700">Inauguração do Novo Campo da ADAM</h3>
+              <p class="mt-2 text-gray-600 text-sm">
+                No primeiro dia da viagem, os voluntários participaram da inauguração...
+              </p>
+              <a href="https://www.instagram.com/p/DMdF1eaORoU/?img_index=1" 
+                 class="mt-4 inline-block text-purple-600 font-semibold hover:underline text-sm">
+                Continuar lendo »
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+  
+    <div class="mt-6 flex justify-center items-center space-x-4">
+    <button id="prevBtnBlog" class="px-4 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700">
+  ← Anterior
+</button>
+<button id="nextBtnBlog" class="px-4 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700">
+  Próxima →
+</button>
+    </div>
+    
   </div>
 </section>
+
+
+<script>
+  (function() {
+    const carouselBlog = document.getElementById("blogCarousel");
+    const cardsBlog = document.querySelectorAll(".blog-card");
+    const nextBtnBlog = document.getElementById("nextBtnBlog");
+    const prevBtnBlog = document.getElementById("prevBtnBlog");
+    let indexBlog = 0;
+
+    function updateCarouselBlog() {
+      carouselBlog.style.transform = `translateX(-${indexBlog * (100 / cardsBlog.length)}%)`;
+
+      prevBtnBlog.disabled = indexBlog === 0;
+      nextBtnBlog.disabled = indexBlog === cardsBlog.length - 1;
+
+      prevBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog === 0);
+      nextBtnBlog.classList.toggle("opacity-50 cursor-not-allowed", indexBlog === cardsBlog.length - 1);
+    }
+
+    nextBtnBlog.addEventListener("click", () => {
+      if (indexBlog < cardsBlog.length - 1) {
+        indexBlog++;
+        updateCarouselBlog();
+      }
+    });
+
+    prevBtnBlog.addEventListener("click", () => {
+      if (indexBlog > 0) {
+        indexBlog--;
+        updateCarouselBlog();
+      }
+    });
+
+    updateCarouselBlog();
+  })();
+</script>
+
 
    </div>
    <section id="doacoes" class="py-20 bg-white">
