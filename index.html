@@ -940,12 +940,11 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 500</p>
             </div>
 
-<a href="#contato"
-   class="inline-block px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 bg-white font-semibold"
->
-  Quero participar
+<a href="#contatos"
+   class="relative z-20 w-full sm:w-auto text-center
+          btn-primary px-4 py-2 rounded-full text-xs font-semibold">
+  Quero Patrocinar
 </a>
-
 
 
           </div>
@@ -980,13 +979,11 @@
               <p class="text-xs text-gray-600">Parcelamento</p>
               <p class="font-bold text-base sm:text-lg">12x de R$ 400</p>
             </div>
-<a href="#contato"
-   style="position: relative; z-index: 50; pointer-events: auto;"
-   class="inline-block px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 bg-white font-semibold"
->
-  Quero participar
+<a href="#contatos"
+   class="relative z-20 w-full sm:w-auto text-center
+          btn-primary px-4 py-2 rounded-full text-xs font-semibold">
+  Quero Patrocinar
 </a>
-
 
           </div>
         </div>
@@ -1176,174 +1173,18 @@
    
 <section id="apoiadores" class="py-16 bg-white">
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-    <h2 class="font-heading text-3xl font-bold text-purple-700 text-center mb-8">
-      Apoiadores
-    </h2>
+    <h2 class="font-heading text-3xl font-bold text-purple-700 text-center mb-8">Apoiadores</h2>
 
     <div class="relative">
-      <!-- Botão Voltar -->
+      
       <button id="apoPrev" aria-label="Voltar" class="apo-arrow left-2" type="button">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M15 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
       </button>
 
-      <!-- Área de scroll horizontal -->
-      <div id="apoViewport" class="apo-viewport rounded-xl overflow-x-auto scroll-smooth">
-        <div id="apoTrack" class="apo-track flex items-center gap-6">
-
-          <!-- LINKS DOS APOIADORES -->
-          <a href="https://www.instagram.com/oatibaienseoficial/" target="_blank">
-            <div class="apo-item"><img src="logo1.png" alt="Apoiador 1" class="apo-img"></div>
-          </a>
-
-          <a href="https://www.facebook.com/baseferroatibaia/?locale=pt_BR" target="_blank">
-            <div class="apo-item"><img src="logo2.png" alt="Apoiador 2" class="apo-img"></div>
-          </a>
-
-          <a href="https://www.georgiasportschiropractic.com/" target="_blank">
-            <div class="apo-item"><img src="logo3.png" alt="Apoiador 3" class="apo-img"></div>
-          </a>
-
-          <a href="https://www.facebook.com/smartpixoficial/?locale=pt_BR" target="_blank">
-            <div class="apo-item"><img src="logo4.png" alt="Apoiador 4" class="apo-img"></div>
-          </a>
-
-          <a href="https://www.facebook.com/edubikeatibaia/?locale=pt_BR" target="_blank">
-            <div class="apo-item"><img src="logo5.png" alt="Apoiador 5" class="apo-img"></div>
-          </a>
-
-          <a href="https://www.youtube.com/c/PenseLaranja" target="_blank">
-            <div class="apo-item"><img src="logo6.png" alt="Apoiador 6" class="apo-img"></div>
-          </a>
-
-          <a href="https://www.facebook.com/IECCerejeiras/" target="_blank">
-            <div class="apo-item"><img src="logo11.png" alt="Apoiador 11" class="apo-img"></div>
-          </a>
-
-          <!-- Repita outros links se quiser -->
-        </div>
-      </div>
-
-      <!-- Botão Avançar -->
-      <button id="apoNext" aria-label="Avançar" class="apo-arrow right-2" type="button">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ESTILOS -->
-<style>
-  .apo-viewport {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* rolagem suave no iOS */
-    scroll-behavior: smooth;
-  }
-
-  .apo-track {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .apo-item {
-    flex: 0 0 auto;
-    width: 160px;
-    height: 96px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(106, 13, 173, 0.06);
-    padding: 0.5rem;
-  }
-
-  .apo-img {
-    max-height: 64px;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .apo-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 30;
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
-    background: white;
-    border: 1px solid rgba(106, 13, 173, 0.08);
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-  }
-
-  .apo-arrow.left-2 { left: 0.5rem; }
-  .apo-arrow.right-2 { right: 0.5rem; }
-
-  @media (max-width: 640px) {
-    .apo-item { width: 120px; height: 70px; }
-    .apo-img { max-height: 52px; }
-    .apo-arrow { width: 40px; height: 40px; }
-  }
-</style>
-
-<!-- JAVASCRIPT -->
-<script>
-(function() {
-  const viewport = document.getElementById('apoViewport');
-  const nextBtn = document.getElementById('apoNext');
-  const prevBtn = document.getElementById('apoPrev');
-
-  if (!viewport) return;
-
-  // Função de rolagem ao clicar nas setas
-  function scrollByAmount(amount) {
-    viewport.scrollBy({ left: amount, behavior: 'smooth' });
-  }
-
-  nextBtn.addEventListener('click', () => {
-    scrollByAmount(viewport.clientWidth / 2);
-  });
-  prevBtn.addEventListener('click', () => {
-    scrollByAmount(-viewport.clientWidth / 2);
-  });
-
-  // Toque (drag) para mobile e desktop
-  let isDown = false;
-  let startX = 0;
-  let scrollLeft = 0;
-
-  viewport.addEventListener('pointerdown', (e) => {
-    isDown = true;
-    startX = e.clientX;
-    scrollLeft = viewport.scrollLeft;
-    viewport.style.cursor = 'grabbing';
-  });
-
-  viewport.addEventListener('pointermove', (e) => {
-    if (!isDown) return;
-    const x = e.clientX;
-    const walk = startX - x;
-    viewport.scrollLeft = scrollLeft + walk;
-  });
-
-  viewport.addEventListener('pointerup', () => {
-    isDown = false;
-    viewport.style.cursor = 'grab';
-  });
-
-  viewport.addEventListener('pointerleave', () => {
-    isDown = false;
-    viewport.style.cursor = 'grab';
-  });
-})();
-</script>
+      
+      
 
 
 
@@ -1999,42 +1840,40 @@
     });
     
    
-    document.addEventListener('click', (e) => {
-      const modal = document.getElementById('confirmation-modal');
-      if (e.target === modal) {
-        closeModal();
+   
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      const target = document.querySelector(href);
+      if (!target) return; // deixa o link padrão se não existir
+
+      // Se mobile menu estiver aberto, fecha
+      const mobileMenu = document.getElementById('mobile-menu');
+      const isMobileMenuOpen =
+        mobileMenu && mobileMenu.classList.contains('active');
+
+      const scrollToTarget = () => {
+        // Usa scrollIntoView sem bloquear o hash
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      };
+
+      if (isMobileMenuOpen) {
+        mobileMenu.classList.remove('active');
+        setTimeout(scrollToTarget, 260); // espera animação fechar
+      } else {
+        // Atualiza o hash *sem* impedir o comportamento nativo
+        history.pushState(null, null, href);
+
+        scrollToTarget(); // roda suave
       }
     });
-    
-    
- 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    e.preventDefault();
-
-    const mobileMenu = document.getElementById('mobile-menu');
-    const isMobileMenuOpen =
-      mobileMenu && mobileMenu.classList.contains('active');
-
-    const scrollToTarget = () => {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    };
-
-    if (isMobileMenuOpen) {
-      mobileMenu.classList.remove('active');
-      setTimeout(scrollToTarget, 260); // espera animação do menu
-    } else {
-      scrollToTarget();
-    }
   });
 });
+</script>
 
 
     
