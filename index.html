@@ -12,6 +12,59 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+  .apo-viewport {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .apo-item {
+    width: 160px;
+    height: 96px;
+    margin-right: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .apo-img {
+    max-height: 64px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .apo-arrow {
+    width: 44px;
+    height: 44px;
+    background: white;
+    border: 1px solid rgba(106,13,173,0.2);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .apo-arrow:hover {
+    background: #f3e8ff;
+  }
+  #apoViewport {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  
+  scrollbar-width: none;
+
+  
+  -ms-overflow-style: none;
+}
+
+
+#apoViewport::-webkit-scrollbar {
+  display: none;
+}
+
+</style>
+
   <script>
   function togglePix() {
     document.getElementById('pix-info').classList.toggle('hidden');
@@ -940,7 +993,7 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 500</p>
             </div>
 
-<a href="#contatos"
+<a href="#contato"
    class="relative z-20 w-full sm:w-auto text-center
           btn-primary px-4 py-2 rounded-full text-xs font-semibold">
   Quero Patrocinar
@@ -979,7 +1032,7 @@
               <p class="text-xs text-gray-600">Parcelamento</p>
               <p class="font-bold text-base sm:text-lg">12x de R$ 400</p>
             </div>
-<a href="#contatos"
+<a href="#contato"
    class="relative z-20 w-full sm:w-auto text-center
           btn-primary px-4 py-2 rounded-full text-xs font-semibold">
   Quero Patrocinar
@@ -1017,7 +1070,7 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 300</p>
             </div>
 
-           <a href="#contatos"
+           <a href="#contato"
    class="relative z-20 w-full sm:w-auto text-center
           btn-primary px-4 py-2 rounded-full text-xs font-semibold">
   Quero Patrocinar
@@ -1054,7 +1107,7 @@
               <p class="text-xs text-gray-600">Parcelamento</p>
               <p class="font-bold text-base sm:text-lg">12x de R$ 200</p>
             </div>
-<a href="#contatos"
+<a href="#contato"
    class="relative z-20 w-full sm:w-auto text-center
           btn-primary px-4 py-2 rounded-full text-xs font-semibold">
   Quero Patrocinar
@@ -1090,7 +1143,7 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 150</p>
             </div>
 
-          <a href="#contatos"
+          <a href="#contato"
    class="relative z-20 w-full sm:w-auto text-center
           btn-primary px-4 py-2 rounded-full text-xs font-semibold">
   Quero Patrocinar
@@ -1124,7 +1177,7 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 100</p>
             </div>
 
-           <a href="#contatos"
+           <a href="#contato"
    class="relative z-20 w-full sm:w-auto text-center
           btn-primary px-4 py-2 rounded-full text-xs font-semibold">
   Quero Patrocinar
@@ -1157,7 +1210,7 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 50</p>
             </div>
 
-          <a href="#contatos"
+          <a href="#contato"
    class="relative z-20 w-full sm:w-auto text-center
           btn-primary px-4 py-2 rounded-full text-xs font-semibold">
   Quero Patrocinar
@@ -1173,25 +1226,70 @@
    
 <section id="apoiadores" class="py-16 bg-white">
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-    <h2 class="font-heading text-3xl font-bold text-purple-700 text-center mb-8">Apoiadores</h2>
+    <h2 class="font-heading text-3xl font-bold text-purple-700 text-center mb-8">
+      Apoiadores
+    </h2>
 
     <div class="relative">
+
       
-      <button id="apoPrev" aria-label="Voltar" class="apo-arrow left-2" type="button">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <button id="apoPrev" aria-label="Voltar" class="apo-arrow left-2 absolute top-1/2 -translate-y-1/2 z-30">
+        <svg class="w-5 h-5 text-purple-700" fill="none" stroke="currentColor">
           <path d="M15 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
       </button>
 
       
+      <div id="apoViewport" class="apo-viewport overflow-x-auto whitespace-nowrap scroll-smooth">
+        
+       
+        <a href="https://site.oatibaiense.com.br/" target="_blank" class="apo-item inline-block">
+          <img src="logo1.png" alt="Logo 1" class="apo-img">
+        </a>
+        <a href="https://www.baseferro.com.br/" target="_blank" class="apo-item inline-block">
+          <img src="logo2.png" alt="Logo 2" class="apo-img">
+        </a>
+        <a href="https://www.georgiasportschiropractic.com/" target="_blank" class="apo-item inline-block">
+          <img src="logo3.png" alt="Logo 3" class="apo-img">
+        </a>
+        <a href="https://www.facebook.com/smartpixoficial/?locale=pt_BR" target="_blank" class="apo-item inline-block">
+          <img src="logo4.png" alt="Logo 4" class="apo-img">
+        </a>
+        <a href="https://www.facebook.com/edubikeatibaia/?locale=pt_BR" target="_blank" class="apo-item inline-block">
+          <img src="logo5.png" alt="Logo 5" class="apo-img">
+        </a>
+        <a href="https://www.penselaranja.com.br/" target="_blank" class="apo-item inline-block">
+          <img src="logo6.png" alt="Logo 6" class="apo-img">
+        </a>
+        <a href="https://www.facebook.com/p/Borracharia-do-S%C3%A9rgio-Jardim-Imperial-100063474973804/" target="_blank" class="apo-item inline-block">
+          <img src="logo7.png" alt="Logo 7" class="apo-img">
+        </a>
+        <a href="https://www.facebook.com/iecatibaiense/" target="_blank" class="apo-item inline-block">
+          <img src="logo8.png" alt="Logo 8" class="apo-img">
+        </a>
+        <a href="https://www.minhatribo.com.br/" target="_blank" class="apo-item inline-block">
+          <img src="logo9.png" alt="Logo 9" class="apo-img">
+        </a>
+        <a href="https://www.instagram.com/h.v.paisagismo/" target="_blank" class="apo-item inline-block">
+          <img src="logo10.png" alt="Logo 10" class="apo-img">
+        </a>
+        <a href="https://www.facebook.com/IECCerejeiras/" target="_blank" class="apo-item inline-block">
+          <img src="logo11.png" alt="Logo 11" class="apo-img">
+        </a>
+
+      </div>
+
       
+      <button id="apoNext" aria-label="Avançar" class="apo-arrow right-2 absolute top-1/2 -translate-y-1/2 z-30">
+        <svg class="w-5 h-5 text-purple-700" fill="none" stroke="currentColor">
+          <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
 
-
-
-    
-    <p class="text-xs text-gray-500 mt-6">*Todos os valores e benefícios podem ser ajustados conforme negociação. Entre em contato via <a href="#contato" class="text-purple-600 underline">contato</a> para mais informações.</p>
+    </div>
   </div>
 </section>
+
 
 
     </div>
@@ -1956,6 +2054,32 @@ initializeUI();
 
 </script>
 
+<script>
+  const viewport = document.getElementById('apoViewport');
+  const nextBtn = document.getElementById('apoNext');
+  const prevBtn = document.getElementById('apoPrev');
+
+  // Intervalo automático 3000ms = 3 segundos
+  let autoScrollInterval = setInterval(() => {
+    viewport.scrollBy({ left: 1, behavior: 'smooth' });
+  }, 5);
+
+
+  viewport.addEventListener('mouseover', () => clearInterval(autoScrollInterval));
+  viewport.addEventListener('mouseout', () => {
+    autoScrollInterval = setInterval(() => {
+      viewport.scrollBy({ left: 1, behavior: 'smooth' });
+    }, 20);
+  });
+
+  
+  nextBtn.addEventListener('click', () => {
+    viewport.scrollBy({ left: viewport.clientWidth / 2, behavior: 'smooth' });
+  });
+  prevBtn.addEventListener('click', () => {
+    viewport.scrollBy({ left: -viewport.clientWidth / 2, behavior: 'smooth' });
+  });
+</script>
 
     
     
