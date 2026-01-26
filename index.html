@@ -25,7 +25,24 @@
 </script>
 
 
+<style>
+  .btn-patrocinio {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #6A0DAD;
+    color: #fff;
+    text-decoration: none;
+
+    /* ISSO É O MAIS IMPORTANTE 👇 */
+    position: relative;
+    z-index: 9999;
+    pointer-events: auto;
+  }
 </style>
+
  <style>
     html, body {
       margin: 0;
@@ -35,25 +52,6 @@
       overflow-x: hidden; 
     }
   </style>
-  <style>
-  .btn-participar {
-    display: inline-block;
-    padding: 12px 28px;
-    border: 2px solid #7e22ce; /* roxo */
-    color: #7e22ce;
-    background-color: #ffffff;
-    border-radius: 9999px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .btn-participar:hover {
-    background-color: #7e22ce;
-    color: #ffffff;
-  }
-</style>
 <style>
  
   #hero-bg { position:absolute; inset:0; width:100%; height:100%; overflow:hidden; background: #f6f4fb; }
@@ -942,11 +940,10 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 500</p>
             </div>
 
-           <a href="#contato"
-   class="relative z-20 w-full sm:w-auto text-center
-          btn-primary px-4 py-2 rounded-full text-xs font-semibold">
+          <a href="#contato" class="btn-patrocinio">
   Quero Patrocinar
 </a>
+
 
           </div>
         </div>
@@ -1018,9 +1015,12 @@
               <p class="font-bold text-base sm:text-lg">12x de R$ 300</p>
             </div>
 
-           <a href="#contatos" class="btn-participar">
-  Quero participar
+           <a href="#contato"
+   class="relative z-20 w-full sm:w-auto text-center
+          btn-primary px-4 py-2 rounded-full text-xs font-semibold">
+  Quero Patrocinar
 </a>
+
           </div>
         </div>
       </article>
