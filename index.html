@@ -261,19 +261,7 @@
       cursor: pointer;
     }
     
-    .gallery-item {
-      cursor: pointer;
-      overflow: hidden;
-      border-radius: 12px;
-    }
-    
-    .gallery-item img {
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
+  
     
     .mobile-menu {
       transform: translateX(-100%);
@@ -344,6 +332,54 @@
       justify-content: center;
       align-items: center;
     }
+     .moldura {
+    width: 500px;
+    height: 500px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(128, 90, 213, 0.25);
+    overflow: hidden;
+    border: 4px solid #7c3aed;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .imagem {
+    flex: 1;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .imagem img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 16px;
+    background: white;
+    padding: 6px;
+  }
+
+  .info {
+    padding: 20px;
+    text-align: center;
+    background: #fafafa;
+  }
+
+  .info h2 {
+    color: #7c3aed;
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .info p {
+    margin-top: 8px;
+    color: #4c1d95;
+    font-size: 16px;
+    font-weight: 500;
+  }
     
     .confirmation-modal.active {
       display: flex;
@@ -553,35 +589,40 @@
       <p id="mission-text" class="text-lg text-gray-600 leading-relaxed">Ensinar as crianças e adolecentes técnicas e fundamentos de futebol e princípios cristãos que contribuam para seu desenvolvimento pessoal e social.</p>
      </div>
     </div>
-   </section><!-- About Section -->
-   <section id="sobre" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-     <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div>
-       <div class="relative">
-      <div class="rounded-3xl p-8" style="background-color: #EBF5E8;">
-  <div class="rounded-2xl shadow-lg overflow-hidden" style="background-color: #EBF5E8;">
-    <div class="h-64 flex items-center justify-center" style="background-color: #EBF5E8;">
-      <div class="text-center text-white">
-        <div class="w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center" style="background-color: #EBF5E8; opacity: 0.2;">
-             <svg class="w-12 h-12" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-             </svg>
-            </div>
-            <p class="text-sm opacity-100">
-    <img src="AdamFundador.png" alt="Descrição da imagem" width="512" style="transform: translateY(-200)" class="relative z-30;">
-            </p>
-           </div>
+  </section><!-- About Section -->
+
+<section id="sobre" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      
+      <!-- Coluna da Moldura -->
+      <div class="relative flex justify-center">
+        
+        <div class="moldura">
+          <div class="imagem">
+            <img src="AdamFundador.png" alt="Fundadores">
           </div>
-          <div class="p-6 text-center">
-           <h4 class="font-heading font-bold text-xl text-gray-900" class="relative z-20">Francisco Bezerra e D. Maria</h4>
-           <p class="text-purple-600 font-medium" class="relative z-20">Fundador</p>
-          </div>
-         </div>
+
+       <div class="info">
+  <h2 class="nomes-fundadores">Francisco Bezerra &nbsp;•&nbsp; Maria</h2>
+</div>
+
         </div>
-        <div class="absolute -bottom-6 -right-6 bg-yellow-400 rounded-2xl p-4 shadow-lg"><span class="text-3xl">🏆</span>
+
+        <!-- Ícone decorativo -->
+        <div class="absolute -bottom-6 -right-6 bg-yellow-400 rounded-2xl p-4 shadow-lg">
+          <span class="text-3xl">🏆</span>
         </div>
-       </div>
+
       </div>
+
+      <!-- Segunda coluna (se quiser texto depois) -->
+      <!-- <div>Conteúdo aqui</div> -->
+
+    </div>
+  </div>
+</section>
+
       <div><span class="text-purple-600 font-semibold text-sm uppercase tracking-wider">Nossa História</span>
        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-6">Sobre o Projeto ADAM</h2>
        <div class="space-y-4 text-gray-600 leading-relaxed">
